@@ -21,6 +21,10 @@ const RedSectionTitle = ({ children }: { children: React.ReactNode }) => (
 
 const HorizontalLine = () => <div className="h-[0.4px] w-full bg-black" />;
 
+const SectionText = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-black text-center font-semibold text-[12px]">{children}</p>
+);
+
 export default function Info() {
   // Top Card
   const mainColor = "#92BB77";
@@ -30,8 +34,17 @@ export default function Info() {
     "「山の好奇心旺盛なコンサルタント、知識の泉で未来を切り開く！学び続ける探求者の旅は終わらない！」";
   // Card One
   const nativeScore = 20;
+  // Card Two
+  const personalHash1 = "# 向上心";
+  const personalHash2 = "# 成長意欲";
+  const personalHash3 = "# 純真";
+  const personality1 =
+    "知識の探求者 -常に新しい知識を求め、学び続けることに情熱を持つ。問題解決のためにあらゆる情報を収集し、分析する姿勢が特徴。";
+  const kanji1 = "# 計画魔神";
+  const kanji2 = "# 素直実直";
+  const kanji3 = "# 責任番長";
   return (
-    <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5  min-h-[100svh]">
+    <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
       {/* Top Card */}
       <div
         className="w-[95%] mx-auto flex flex-col gap-4 bg-white rounded-br-[20px] rounded-bl-[20px] min-h-[460px] overflow-hidden relative"
@@ -136,6 +149,25 @@ export default function Info() {
               </div>
             </div>
           </div>
+        </div>
+      </WhiteCard>
+      {/* Card Two */}
+      <WhiteCard>
+        <RedSectionTitle>パーソナリティ</RedSectionTitle>
+        <HorizontalLine />
+        <div className="flex flex-row items-center justify-center gap-4">
+          <SectionText>{personalHash1}</SectionText>
+          <SectionText>{personalHash2}</SectionText>
+          <SectionText>{personalHash3}</SectionText>
+        </div>
+        <SectionText>{personality1}</SectionText>
+        <div className="h-5" />
+        <RedSectionTitle>私を表す四字熟語</RedSectionTitle>
+        <HorizontalLine />
+        <div className="flex flex-row items-center justify-center gap-4">
+          <SectionText>{kanji1}</SectionText>
+          <SectionText>{kanji2}</SectionText>
+          <SectionText>{kanji3}</SectionText>
         </div>
       </WhiteCard>
     </div>
