@@ -47,9 +47,8 @@ const SectionText = ({
   <p
     className="text-black  font-semibold text-[12px]"
     style={{ textAlign: align }}
-  >
-    {children}
-  </p>
+    dangerouslySetInnerHTML={{ __html: children as any }}
+  />
 );
 
 const ColouredProgressIndicator = ({
@@ -106,7 +105,10 @@ const ColouredProgressIndicator = ({
 export default function Info() {
   const [isReadMoreHidden, setIsReadMoreHidden] = useState<boolean>(true);
   const [hideButton, setHideButton] = useState<boolean>(false);
+  const [data, setData] = useState<any>();
+
   const handleReadMore = () => setIsReadMoreHidden((prev) => !prev);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!isReadMoreHidden) {
@@ -115,51 +117,56 @@ export default function Info() {
     }, 2000);
     return () => clearTimeout(timer);
   }, [isReadMoreHidden]);
+
+  const fetchData = async () => {
+    const apiResponse = await fetch(
+      "https://card.stg.be-native.life:8443/friends/friends_data/1999/11/12"
+    );
+    const apiData = await apiResponse.json();
+    setData(apiData);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   // Top Card
   const mainColor = "#92BB77";
   const userName = "テリー伊藤";
-  const personalChara = "山の好奇心旺盛なコンサルタント";
-  const catchTitle =
-    "「山の好奇心旺盛なコンサルタント、知識の泉で未来を切り開く！学び続ける探求者の旅は終わらない！」";
+  const userType = data?.param1;
+  const personalChara = data?.param2;
+  const catchTitle = data?.param3;
 
   // Card One
-  const nativeScore = 20;
+  const nativeScore = data?.native_score;
 
   // Card Two
-  const personalHash1 = "# 向上心";
-  const personalHash2 = "# 成長意欲";
-  const personalHash3 = "# 純真";
-  const personality1 =
-    "知識の探求者 -常に新しい知識を求め、学び続けることに情熱を持つ。問題解決のためにあらゆる情報を収集し、分析する姿勢が特徴。";
-  const kanji1 = "# 計画魔神";
-  const kanji2 = "# 素直実直";
-  const kanji3 = "# 責任番長";
+  const personalHash1 = `#${data?.param4?.split("#")?.[1]}`;
+  const personalHash2 = `#${data?.param4?.split("#")?.[2]}`;
+  const personalHash3 = `#${data?.param4?.split("#")?.[3]}`;
+  const personality1 = data?.param5;
+  const kanji1 = `#${data?.param7?.split("#")?.[1]}`;
+  const kanji2 = `#${data?.param7?.split("#")?.[1]}`;
+  const kanji3 = `#${data?.param7?.split("#")?.[1]}`;
 
   // Card Three
-  const motivationMoment1 = "新しい知識を得たとき";
-  const motivationMoment1Desc =
-    "「これ、知らなかった！」と新しい知識を発見した瞬間、心が踊る。";
-  const demotivationMoment1 = "学ぶ機会が失われたとき";
-  const demotivationMoment1Desc =
-    "「これ、学べないの？」と感じると、心の中で「もっと知識を吸収したいのに！」と嘆く。";
+  const motivationMoment1 = data?.param8;
+  const demotivationMoment1 = data?.param10;
 
   // Card Four
-  const fitChara1 = "大地の完成鋭いアナリスト(EP-)";
-  const fitChara1Hash1 = "# 優しい";
-  const fitChara1Hash2 = "# 優柔不断";
-  const fitChara1Title = "堅実なリーダーシップ  ";
-  const fitChara1Desc =
-    "大地の責任感強いプロジェクトリーダーは、いつも計画を立てて物事を進める堅実派。彼の指導の下で、プロジェクトはスムーズに進行する。";
-  const fitChara2 = "鉄の真面目なマネージャー(IF+)";
-  const fitChara2Hash1 = "# 優しい";
-  const fitChara2Hash2 = "# 優柔不断";
-  const fitChara2Title = "鉄壁の責任感  ";
-  const fitChara2Desc =
-    "鉄の真面目なマネージャーは、責任感が鉄のように強固。仕事に対する真面目な姿勢と計画性で、常に高い成果を出す。";
-  const getAlongScore1 = 15;
-  const getAlongScore2 = 25;
-  const secretGetAlong =
-    "「私と仲良くなりたい？それなら、心を開いて一緒に話し合おう！感情を大切にすることが好きだから、君も自分の気持ちを正直に伝えてくれると嬉い。共感と理解を大事にするから、相手の立場を考えたコミュニケーションが得意。お互いに助け合える関係を築こう。そして、一緒に感動を共有することが絆を深める鍵。共に感動し、笑顔を分かち合えると、最高のパートナーになれるよ！」";
+  const fitChara1 = data?.partner_1;
+  const fitChara1Hash1 = `#${data?.best_partner_hashtag1?.split("#")?.[1]}`;
+  const fitChara1Hash2 = `#${data?.best_partner_hashtag1?.split("#")?.[2]}`;
+  const fitChara1Title = data?.best_partner_text_1;
+
+  const fitChara2 = data?.partner_2;
+  const fitChara2Hash1 = `#${data?.best_partner_hashtag2?.split("#")?.[1]}`;
+  const fitChara2Hash2 = `#${data?.best_partner_hashtag2?.split("#")?.[2]}`;
+  const fitChara2Title = data?.best_partner_text_2;
+
+  const getAlongScore1 = Number(nativeScore) - 5;
+  const getAlongScore2 = Number(nativeScore) + 5;
+  const secretGetAlong = data?.param12;
 
   //Card Five
   const card5Title = "運動家";
@@ -171,37 +178,19 @@ export default function Info() {
   const percentage5 = 30;
 
   //Card Seven
-  const personality2 = "冷静沈着なアドバイザー  ";
-  const personality2Desc =
-    "的確なアドバイスを提供し、冷静に状況を判断する。プライベートでも、友人や家族の相談に乗り、的確な助言をすることが多い。";
-  const personality3 = "多様な視点の持ち主  ";
-  const personality3Desc =
-    "多角的な視点で物事を捉える。趣味や興味も幅広く、常に新しいことに挑戦し続ける姿勢が魅力的。";
+  const personality2 = data?.param6;
 
   //Card Eight
-  const motivationMoment2 = "問題を解決したとき    ";
-  const motivationMoment2Desc =
-    "「この方法で解決できる！」と問題解決のアイデアが浮かんだとき、気分が最高に。    ";
-  const motivationMoment3 = "学びの場にいるとき    ";
-  const motivationMoment3Desc =
-    "「ここで新しいことを学べる！」と感じると、全力で知識の吸収に取り組む。";
-  const demotivationMoment2 = "誤った情報を掴まされたとき    ";
-  const demotivationMoment2Desc =
-    "「え、この情報間違ってる？」と気づいた瞬間、「もっとしっかり確認すべきだった…」と自己反省。";
-  const demotivationMoment3 = "知識が役立たなかったとき    ";
-  const demotivationMoment3Desc =
-    "「この情報、使えないじゃん」と感じると、心の中で「何のために学んだんだ…」と落ち込む。";
+  const motivationMoment2 = data?.param9;
+  const demotivationMoment2 = data?.param11;
 
   //Card Nine
-  const toreitsu1 = "堅実さと信頼性";
-  const toreitsu1Desc =
-    "木の要素と真面目なマネージャーを持つ人は、まさに「堅実さ」の象徴です。計画をたて、その通りに進ことに長けています。スケジュール通りに動き、約束したことを必ず守る姿勢は、周囲から絶大な信頼を得ます。例えば、友達との約束も、仕事の締め切りも、決して忘れることはありません。「この人に任せておけば安心」という言葉は、まさにそのためにあります。";
-  const toreitsu2 = "自立心と責任感";
-  const toreitsu2Desc =
-    "木の要素と真面目なマネージャーを持つ人は、まさに「堅実さ」の象徴です。計画をたて、その通りに進ことに長けています。スケジュール通りに動き、約束したことを必ず守る姿勢は、周囲から絶大な信頼を得ます。例えば、友達との約束も、仕事の締め切りも、決して忘れることはありません。「この人に任せておけば安心」という言葉は、まさにそのためにあります。";
-  const toreitsu3 = "素直さと誠実さ";
-  const toreitsu3Desc =
-    "木の要素と真面目なマネージャーを持つ人は、まさに「堅実さ」の象徴です。計画をたて、その通りに進ことに長けています。スケジュール通りに動き、約束したことを必ず守る姿勢は、 周囲から絶大な信頼を得ます。例えば、友達との約束も、仕事の締め切りも、決して忘れることはありません。「この人に任せておけば安心」という言葉は、まさにそのためにあります。";
+  const toreitsu1 = data?.param13;
+  const toreitsu1Desc = data?.param14;
+  const toreitsu2 = data?.param15;
+  const toreitsu2Desc = data?.param16;
+  const toreitsu3 = data?.param17;
+  const toreitsu3Desc = data?.param18;
 
   return (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
@@ -217,7 +206,13 @@ export default function Info() {
           <h1 className="text-[18px] text-black font-bold text-center mt-10">
             {userName}さんのnative.card
           </h1>
-          <Image alt="" src={sampleChar} width={140} style={{ zIndex: 1 }} />
+          <Image
+            alt=""
+            src={`https://card.stg.be-native.life:8443/friends/charimg/${userType}`}
+            width={200}
+            height={200}
+            style={{ zIndex: 1 }}
+          />
           <div className="flex flex-col gap-1 mt-2">
             <p
               style={{ color: mainColor }}
@@ -229,7 +224,7 @@ export default function Info() {
               style={{ color: mainColor }}
               className="text-[28px] text-center font-bold"
             >
-              MtC-
+              {userType}
             </p>
             <p className="text-[14px] text-black font-semibold text-center w-[90%] m-auto mb-5">
               {catchTitle}
@@ -338,12 +333,10 @@ export default function Info() {
         <RedSectionTitle>テンションUPする瞬間</RedSectionTitle>
         <HorizontalLine />
         <SectionText>{motivationMoment1}</SectionText>
-        <SectionText>{motivationMoment1Desc}</SectionText>
         <div className="h-5" />
         <RedSectionTitle>テンションDOWNする瞬間</RedSectionTitle>
         <HorizontalLine />
         <SectionText>{demotivationMoment1}</SectionText>
-        <SectionText>{demotivationMoment1Desc}</SectionText>
       </WhiteCard>
 
       {/* Card Four */}
@@ -352,7 +345,13 @@ export default function Info() {
         <HorizontalLine />
         <div className="w-full grid grid-cols-2 gap-5 mt-4">
           <div className="w-full flex flex-col items-center gap-2">
-            <Image alt="" src={sampleChar} width={80} style={{ zIndex: 1 }} />
+            <Image
+              alt=""
+              src={`https://card.stg.be-native.life:8443/friends/charimg/${fitChara1}`}
+              width={120}
+              height={120}
+              style={{ zIndex: 1 }}
+            />
             <p className="text-[#92BB77] text-[12px] font-semibold text-center">
               {fitChara1}
             </p>
@@ -360,13 +359,16 @@ export default function Info() {
               <SectionText>{fitChara1Hash1}</SectionText>
               <SectionText>{fitChara1Hash2}</SectionText>
             </div>
-            <p className="font-bold text-center text-black text-[14px]">
-              {fitChara1Title}
-            </p>
-            <SectionText align="left">{fitChara1Desc}</SectionText>
+            <SectionText align="left">{fitChara1Title}</SectionText>
           </div>
           <div className="w-full flex flex-col items-center gap-2">
-            <Image alt="" src={sampleChar} width={80} style={{ zIndex: 1 }} />
+            <Image
+              alt=""
+              src={`https://card.stg.be-native.life:8443/friends/charimg/${fitChara2}`}
+              width={120}
+              height={120}
+              style={{ zIndex: 1 }}
+            />
             <p className="text-[#92BB77] text-[12px] font-semibold text-center">
               {fitChara2}
             </p>
@@ -374,10 +376,7 @@ export default function Info() {
               <SectionText>{fitChara2Hash1}</SectionText>
               <SectionText>{fitChara2Hash2}</SectionText>
             </div>
-            <p className="font-bold text-center text-black text-[14px]">
-              {fitChara2Title}
-            </p>
-            <SectionText align="left">{fitChara2Desc}</SectionText>
+            <SectionText align="left">{fitChara2Title}</SectionText>
           </div>
         </div>
         <div className="h-5" />
@@ -457,10 +456,7 @@ export default function Info() {
             <RedSectionTitle>詳細なパーソナリティ</RedSectionTitle>
             <HorizontalLine />
             <SectionText>{personality2}</SectionText>
-            <SectionText>{personality2Desc}</SectionText>
             <div className="h-5" />
-            <SectionText>{personality3}</SectionText>
-            <SectionText>{personality3Desc}</SectionText>
           </WhiteCard>
 
           {/* Card Eight */}
@@ -468,19 +464,10 @@ export default function Info() {
             <RedSectionTitle>もっとテンションUPする瞬間</RedSectionTitle>
             <HorizontalLine />
             <SectionText>{motivationMoment2}</SectionText>
-            <SectionText>{motivationMoment2Desc}</SectionText>
-            <div className="h-5" />
-            <SectionText>{motivationMoment3}</SectionText>
-            <SectionText>{motivationMoment3Desc}</SectionText>
             <div className="h-5" />
             <RedSectionTitle>もっとテンションDOWNする瞬間</RedSectionTitle>
             <HorizontalLine />
             <SectionText>{demotivationMoment2}</SectionText>
-            <SectionText>{demotivationMoment2Desc}</SectionText>
-            <div className="h-5" />
-            <SectionText>{demotivationMoment3}</SectionText>
-            <SectionText>{demotivationMoment3Desc}</SectionText>
-            <div className="h-5" />
           </WhiteCard>
 
           {/* Card Nine */}
