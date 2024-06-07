@@ -148,6 +148,20 @@ export default function Info() {
   const personality3Desc =
     "多角的な視点で物事を捉える。趣味や興味も幅広く、常に新しいことに挑戦し続ける姿勢が魅力的。";
 
+  //Card Eight
+  const motivationMoment2 = "問題を解決したとき    ";
+  const motivationMoment2Desc =
+    "「この方法で解決できる！」と問題解決のアイデアが浮かんだとき、気分が最高に。    ";
+  const motivationMoment3 = "学びの場にいるとき    ";
+  const motivationMoment3Desc =
+    "「ここで新しいことを学べる！」と感じると、全力で知識の吸収に取り組む。";
+  const demotivationMoment2 = "誤った情報を掴まされたとき    ";
+  const demotivationMoment2Desc =
+    "「え、この情報間違ってる？」と気づいた瞬間、「もっとしっかり確認すべきだった…」と自己反省。";
+  const demotivationMoment3 = "知識が役立たなかったとき    ";
+  const demotivationMoment3Desc =
+    "「この情報、使えないじゃん」と感じると、心の中で「何のために学んだんだ…」と落ち込む。";
+
   return (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
       {/* Top Card */}
@@ -452,6 +466,26 @@ export default function Info() {
         <div className="h-5" />
         <SectionText>{personality3}</SectionText>
         <SectionText>{personality3Desc}</SectionText>
+      </WhiteCard>
+
+      {/* Card Eight */}
+      <WhiteCard>
+        <RedSectionTitle>もっとテンションUPする瞬間</RedSectionTitle>
+        <HorizontalLine />
+        <SectionText>{motivationMoment2}</SectionText>
+        <SectionText>{motivationMoment2Desc}</SectionText>
+        <div className="h-5" />
+        <SectionText>{motivationMoment3}</SectionText>
+        <SectionText>{motivationMoment3Desc}</SectionText>
+        <div className="h-5" />
+        <RedSectionTitle>もっとテンションDOWNする瞬間</RedSectionTitle>
+        <HorizontalLine />
+        <SectionText>{demotivationMoment2}</SectionText>
+        <SectionText>{demotivationMoment2Desc}</SectionText>
+        <div className="h-5" />
+        <SectionText>{demotivationMoment3}</SectionText>
+        <SectionText>{demotivationMoment3Desc}</SectionText>
+        <div className="h-5" />
       </WhiteCard>
     </div>
   );
