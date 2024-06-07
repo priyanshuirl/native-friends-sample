@@ -25,6 +25,57 @@ const SectionText = ({ children }: { children: React.ReactNode }) => (
   <p className="text-black text-center font-semibold text-[12px]">{children}</p>
 );
 
+const ColouredProgressIndicator = ({
+  color,
+  endIndicator,
+  percentage,
+  startIndicator,
+  type,
+}: {
+  percentage: number;
+  color: string;
+  type: string;
+  startIndicator: string;
+  endIndicator: string;
+}) => {
+  return (
+    <div className="w-full flex flex-row items-center h-[56px] my-1">
+      <p className="text-[10px] text-[#AAA] font-semibold min-w-[70px] mt-10">
+        {startIndicator}
+      </p>
+      <div className="w-full relative">
+        <div
+          className=" absolute top-[-36px]"
+          style={{
+            left: `calc(${percentage}% - 20px)`,
+          }}
+        >
+          <p className="text-[14px] font-bold">
+            <span style={{ color }}>{`${percentage}%`}</span>
+            {type}
+          </p>
+        </div>
+        <div
+          className="w-[28px] h-[28px] rounded-full absolute top-[-7.7px]"
+          style={{
+            left: `calc(${percentage}% - 20px)`,
+            background: color,
+          }}
+        />
+        <div className="flex flex-row items-center h-[14px] bg-[#E5E5E5] rounded-full w-full overflow-hidden">
+          <div
+            className="h-full "
+            style={{ width: `${percentage}%`, background: color }}
+          />
+        </div>
+      </div>
+      <p className="text-[10px] text-[#AAA] font-semibold min-w-[60px] mt-10 text-right">
+        {endIndicator}
+      </p>
+    </div>
+  );
+};
+
 export default function Info() {
   // Top Card
   const mainColor = "#92BB77";
@@ -71,6 +122,15 @@ export default function Info() {
   const getAlongScore2 = 25;
   const secretGetAlong =
     "「私と仲良くなりたい？それなら、心を開いて一緒に話し合おう！感情を大切にすることが好きだから、君も自分の気持ちを正直に伝えてくれると嬉い。共感と理解を大事にするから、相手の立場を考えたコミュニケーションが得意。お互いに助け合える関係を築こう。そして、一緒に感動を共有することが絆を深める鍵。共に感動し、笑顔を分かち合えると、最高のパートナーになれるよ！」";
+
+  //Card Five
+  const card5Title = "運動家";
+  const card5SubTitle = "ENFP-A / ENFP-T";
+  const percentage1 = 75;
+  const percentage2 = 51;
+  const percentage3 = 61;
+  const percentage4 = 69;
+  const percentage5 = 30;
 
   return (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
@@ -254,6 +314,59 @@ export default function Info() {
         <RedSectionTitle>私と仲良くなる秘訣</RedSectionTitle>
         <HorizontalLine />
         <SectionText>{secretGetAlong}</SectionText>
+      </WhiteCard>
+      {/* Card Five */}
+      <WhiteCard>
+        <p className="text-[#B696C2] font-semibold text-[14px] text-center">
+          MBTIの結果と比べてみよう あなたの生まれつきの素養をMBTIでいうと
+        </p>
+        <div className="flex flex-col items-center mt-4 mb-2">
+          <Image alt="" src={sampleChar} width={80} style={{ zIndex: 1 }} />
+        </div>
+        <p className="font-semibold text-[24px] text-[#56A278] text-center">
+          {card5Title}
+        </p>
+        <SectionText>{card5SubTitle}</SectionText>
+        <p className="text-[#B696C2] font-semibold text-[12px] text-center">
+          MBTI式嗜好性パラメーター
+        </p>
+        <HorizontalLine />
+        <div className="h-5" />
+        <ColouredProgressIndicator
+          color="#6894AE"
+          percentage={percentage1}
+          type="外交型"
+          startIndicator="外交型"
+          endIndicator="内向型"
+        />
+        <ColouredProgressIndicator
+          color="#D5B260"
+          percentage={percentage2}
+          type="直感型"
+          startIndicator="直感型"
+          endIndicator="観察型"
+        />
+        <ColouredProgressIndicator
+          color="#69A07B"
+          percentage={percentage3}
+          type="感情型"
+          startIndicator="思考型"
+          endIndicator="感情型"
+        />
+        <ColouredProgressIndicator
+          color="#7D6494"
+          percentage={percentage4}
+          type="探索型"
+          startIndicator="計画型"
+          endIndicator="探索型"
+        />
+        <ColouredProgressIndicator
+          color="#D16E6B"
+          percentage={percentage5}
+          type="自己主張型"
+          startIndicator="自己主張型"
+          endIndicator="慎重型"
+        />
       </WhiteCard>
     </div>
   );
