@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { sampleChar } from "@/assets";
 import Image from "next/image";
 import { snsSectionQRCode } from "@/assets/qrCodes";
@@ -92,6 +93,17 @@ const ColouredProgressIndicator = ({
 };
 
 export default function Info() {
+  const [isReadMoreHidden, setIsReadMoreHidden] = useState<boolean>(true);
+  const [hideButton, setHideButton] = useState<boolean>(false);
+  const handleReadMore = () => setIsReadMoreHidden((prev) => !prev);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isReadMoreHidden) {
+        setHideButton(true);
+      }
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [isReadMoreHidden]);
   // Top Card
   const mainColor = "#92BB77";
   const userName = "テリー伊藤";
@@ -421,7 +433,67 @@ export default function Info() {
           endIndicator="慎重型"
         />
       </WhiteCard>
+      <div className="overflow-hidden">
+        <div
+          className="flex flex-col items-center gap-5 "
+          style={{
+            marginBottom: isReadMoreHidden ? "-2000px" : "0px",
+            transition: "2s ease",
+          }}
+        >
+          {/* Card Seven */}
+          <WhiteCard>
+            <RedSectionTitle>詳細なパーソナリティ</RedSectionTitle>
+            <HorizontalLine />
+            <SectionText>{personality2}</SectionText>
+            <SectionText>{personality2Desc}</SectionText>
+            <div className="h-5" />
+            <SectionText>{personality3}</SectionText>
+            <SectionText>{personality3Desc}</SectionText>
+          </WhiteCard>
 
+          {/* Card Eight */}
+          <WhiteCard>
+            <RedSectionTitle>もっとテンションUPする瞬間</RedSectionTitle>
+            <HorizontalLine />
+            <SectionText>{motivationMoment2}</SectionText>
+            <SectionText>{motivationMoment2Desc}</SectionText>
+            <div className="h-5" />
+            <SectionText>{motivationMoment3}</SectionText>
+            <SectionText>{motivationMoment3Desc}</SectionText>
+            <div className="h-5" />
+            <RedSectionTitle>もっとテンションDOWNする瞬間</RedSectionTitle>
+            <HorizontalLine />
+            <SectionText>{demotivationMoment2}</SectionText>
+            <SectionText>{demotivationMoment2Desc}</SectionText>
+            <div className="h-5" />
+            <SectionText>{demotivationMoment3}</SectionText>
+            <SectionText>{demotivationMoment3Desc}</SectionText>
+            <div className="h-5" />
+          </WhiteCard>
+
+          {/* Card Nine */}
+          <WhiteCard>
+            <GoldenSectionTitle>トリセツその１</GoldenSectionTitle>
+            <HorizontalLine />
+            <SectionText>{toreitsu1}</SectionText>
+            <SectionText>{toreitsu1Desc}</SectionText>
+            <div className="h-5" />
+
+            <GoldenSectionTitle>トリセツその２</GoldenSectionTitle>
+            <HorizontalLine />
+            <SectionText>{toreitsu2}</SectionText>
+            <SectionText>{toreitsu2Desc}</SectionText>
+            <div className="h-5" />
+
+            <GoldenSectionTitle>トリセツその３</GoldenSectionTitle>
+            <HorizontalLine />
+            <SectionText>{toreitsu3}</SectionText>
+            <SectionText>{toreitsu3Desc}</SectionText>
+            <div className="h-5" />
+          </WhiteCard>
+        </div>
+      </div>
       {/* Card Six */}
       <WhiteCard>
         <div className="flex flex-col items-center mt-5 mb-8">
@@ -471,61 +543,19 @@ export default function Info() {
           </div>
         </div>
       </WhiteCard>
-      <button className="my-4 border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px]">
-        <p className="text-white text-[16px] font-semibold">さらに深く見る</p>
-      </button>
 
-      {/* Card Seven */}
-      <WhiteCard>
-        <RedSectionTitle>詳細なパーソナリティ</RedSectionTitle>
-        <HorizontalLine />
-        <SectionText>{personality2}</SectionText>
-        <SectionText>{personality2Desc}</SectionText>
-        <div className="h-5" />
-        <SectionText>{personality3}</SectionText>
-        <SectionText>{personality3Desc}</SectionText>
-      </WhiteCard>
+      {hideButton ? null : (
+        <button
+          onClick={handleReadMore}
+          className="my-4 border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px]"
+        >
+          <p className="text-white text-[16px] font-semibold">
+            "さらに深く見る"
+          </p>
+        </button>
+      )}
 
-      {/* Card Eight */}
-      <WhiteCard>
-        <RedSectionTitle>もっとテンションUPする瞬間</RedSectionTitle>
-        <HorizontalLine />
-        <SectionText>{motivationMoment2}</SectionText>
-        <SectionText>{motivationMoment2Desc}</SectionText>
-        <div className="h-5" />
-        <SectionText>{motivationMoment3}</SectionText>
-        <SectionText>{motivationMoment3Desc}</SectionText>
-        <div className="h-5" />
-        <RedSectionTitle>もっとテンションDOWNする瞬間</RedSectionTitle>
-        <HorizontalLine />
-        <SectionText>{demotivationMoment2}</SectionText>
-        <SectionText>{demotivationMoment2Desc}</SectionText>
-        <div className="h-5" />
-        <SectionText>{demotivationMoment3}</SectionText>
-        <SectionText>{demotivationMoment3Desc}</SectionText>
-        <div className="h-5" />
-      </WhiteCard>
-
-      {/* Card Nine */}
-      <WhiteCard>
-        <GoldenSectionTitle>トリセツその１</GoldenSectionTitle>
-        <HorizontalLine />
-        <SectionText>{toreitsu1}</SectionText>
-        <SectionText>{toreitsu1Desc}</SectionText>
-        <div className="h-5" />
-
-        <GoldenSectionTitle>トリセツその２</GoldenSectionTitle>
-        <HorizontalLine />
-        <SectionText>{toreitsu2}</SectionText>
-        <SectionText>{toreitsu2Desc}</SectionText>
-        <div className="h-5" />
-
-        <GoldenSectionTitle>トリセツその３</GoldenSectionTitle>
-        <HorizontalLine />
-        <SectionText>{toreitsu3}</SectionText>
-        <SectionText>{toreitsu3Desc}</SectionText>
-        <div className="h-5" />
-      </WhiteCard>
+      {/* Footer */}
       <div className="flex flex-col items-center mt-10 mb-1">
         <Image alt="" src={logo} width={150} style={{ zIndex: 1 }} />
       </div>
