@@ -35,7 +35,7 @@ export default function Home() {
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<string>("");
   return (
-    <div className="max-w-[450px] m-auto flex flex-col justify-between items-center h-[100dvh] pb-10">
+    <div className="max-w-[450px] m-auto flex flex-col justify-between items-center h-[100svh]">
       <div className="flex flex-col items-center gap-10 w-full">
         <h1 className="text-black text-center text-[28px] font-bold mt-10">
           native. for friends
@@ -77,7 +77,7 @@ export default function Home() {
         </button>
         <p className="text-black text-[12px] font-semibold">native. 1.8.3</p>
       </div>
-      <div className="flex flex-row items-center justify-center gap-3 mt-10">
+      <div className="flex flex-row items-center justify-center gap-3 my-10">
         {bottomCharacters.map((image, index) => {
           return (
             <Image src={image} alt="" key={index} height={40} width={40} />
