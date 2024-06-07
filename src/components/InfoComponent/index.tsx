@@ -11,6 +11,7 @@ import {
 } from "@/assets/social";
 import { logo } from "@/assets/brand";
 import { useRouter } from "next/navigation";
+import QRCode from "react-qr-code";
 
 const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -548,12 +549,12 @@ export default function InfoComponent({
       <WhiteCard>
         <div className="h-5" />
         <SectionText>スキャンして共有</SectionText>
-        <div className="flex flex-col items-center mt-5 mb-8">
-          <Image
-            alt=""
-            src={snsSectionQRCode}
-            width={150}
-            style={{ zIndex: 1 }}
+        <div className="flex flex-col items-center mt-5 mb-8 w-[60%] mx-auto">
+          <QRCode
+            size={256}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            value={shareLink}
+            viewBox={`0 0 256 256`}
           />
         </div>
         <SectionText>native.をSNSでシェア、相性診断</SectionText>
