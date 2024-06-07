@@ -35,7 +35,7 @@ export default function Home() {
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<string>("");
   return (
-    <div className="max-w-[450px] m-auto flex flex-col justify-between items-center h-[100svh]">
+    <div className="max-w-[450px] m-auto flex flex-col justify-between items-center h-[100svh] bg-white">
       <div className="flex flex-col items-center gap-10 w-full">
         <h1 className="text-black text-center text-[28px] font-bold mt-10">
           native. for friends

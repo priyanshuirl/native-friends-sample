@@ -8,6 +8,7 @@ import lightBlueChar from "./lightBlueChar.svg";
 import purpleChar from "./purpleChar.svg";
 import greyChar from "./greyChar.svg";
 import brownChar from "./brownChar.svg";
+import sampleChar from "./sampleChar.svg";
 
 export {
   darkGreenChar,
@@ -20,4 +21,5 @@ export {
   greyChar,
   lightBlueChar,
   purpleChar,
+  sampleChar,
 };
