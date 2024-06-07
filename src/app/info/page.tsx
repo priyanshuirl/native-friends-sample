@@ -43,6 +43,13 @@ export default function Info() {
   const kanji1 = "# 計画魔神";
   const kanji2 = "# 素直実直";
   const kanji3 = "# 責任番長";
+  // Card Three
+  const motivationMoment1 = "新しい知識を得たとき";
+  const motivationMoment1Desc =
+    "「これ、知らなかった！」と新しい知識を発見した瞬間、心が踊る。";
+  const demotivationMoment1 = "学ぶ機会が失われたとき";
+  const demotivationMoment1Desc =
+    "「これ、学べないの？」と感じると、心の中で「もっと知識を吸収したいのに！」と嘆く。";
   return (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
       {/* Top Card */}
@@ -169,6 +176,18 @@ export default function Info() {
           <SectionText>{kanji2}</SectionText>
           <SectionText>{kanji3}</SectionText>
         </div>
+      </WhiteCard>
+      {/* Card Three */}
+      <WhiteCard>
+        <RedSectionTitle>テンションUPする瞬間</RedSectionTitle>
+        <HorizontalLine />
+        <SectionText>{motivationMoment1}</SectionText>
+        <SectionText>{motivationMoment1Desc}</SectionText>
+        <div className="h-5" />
+        <RedSectionTitle>テンションDOWNする瞬間</RedSectionTitle>
+        <HorizontalLine />
+        <SectionText>{demotivationMoment1}</SectionText>
+        <SectionText>{demotivationMoment1Desc}</SectionText>
       </WhiteCard>
     </div>
   );
