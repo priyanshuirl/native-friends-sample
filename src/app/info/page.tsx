@@ -140,6 +140,14 @@ export default function Info() {
   const percentage4 = 69;
   const percentage5 = 30;
 
+  //Card Seven
+  const personality2 = "冷静沈着なアドバイザー  ";
+  const personality2Desc =
+    "的確なアドバイスを提供し、冷静に状況を判断する。プライベートでも、友人や家族の相談に乗り、的確な助言をすることが多い。";
+  const personality3 = "多様な視点の持ち主  ";
+  const personality3Desc =
+    "多角的な視点で物事を捉える。趣味や興味も幅広く、常に新しいことに挑戦し続ける姿勢が魅力的。";
+
   return (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
       {/* Top Card */}
@@ -300,12 +308,12 @@ export default function Info() {
             <p className="font-bold text-center text-black text-[14px]">
               {fitChara1Title}
             </p>
-            <SectionText>{fitChara2Desc}</SectionText>
+            <SectionText>{fitChara1Desc}</SectionText>
           </div>
           <div className="w-full flex flex-col items-center gap-2">
             <Image alt="" src={sampleChar} width={80} style={{ zIndex: 1 }} />
             <p className="text-[#92BB77] text-[12px] font-semibold text-center">
-              {fitChara1}
+              {fitChara2}
             </p>
             <div className="flex flex-row items-center justify-center gap-4">
               <SectionText>{fitChara2Hash1}</SectionText>
@@ -434,6 +442,17 @@ export default function Info() {
       <button className="my-4 border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px]">
         <p className="text-white text-[16px] font-semibold">さらに深く見る</p>
       </button>
+
+      {/* Card Seven */}
+      <WhiteCard>
+        <RedSectionTitle>詳細なパーソナリティ</RedSectionTitle>
+        <HorizontalLine />
+        <SectionText>{personality2}</SectionText>
+        <SectionText>{personality2Desc}</SectionText>
+        <div className="h-5" />
+        <SectionText>{personality3}</SectionText>
+        <SectionText>{personality3Desc}</SectionText>
+      </WhiteCard>
     </div>
   );
 }
