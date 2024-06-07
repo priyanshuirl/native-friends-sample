@@ -608,7 +608,7 @@ export default function InfoComponent({
           className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-[#EC736E] opacity-85 rounded-[20px]"
         >
           <p className="text-white text-[16px] font-semibold">
-            ◯◯さんとの相性を見る
+            {referrerName}さんとの相性を見る
           </p>
         </button>
       ) : null}
