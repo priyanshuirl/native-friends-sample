@@ -37,8 +37,19 @@ const GoldenSectionTitle = ({ children }: { children: React.ReactNode }) => (
 
 const HorizontalLine = () => <div className="h-[0.4px] w-full bg-black" />;
 
-const SectionText = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-black text-center font-semibold text-[12px]">{children}</p>
+const SectionText = ({
+  children,
+  align = "center",
+}: {
+  children: React.ReactNode;
+  align?: "center" | "left";
+}) => (
+  <p
+    className="text-black  font-semibold text-[12px]"
+    style={{ textAlign: align }}
+  >
+    {children}
+  </p>
 );
 
 const ColouredProgressIndicator = ({
@@ -352,7 +363,7 @@ export default function Info() {
             <p className="font-bold text-center text-black text-[14px]">
               {fitChara1Title}
             </p>
-            <SectionText>{fitChara1Desc}</SectionText>
+            <SectionText align="left">{fitChara1Desc}</SectionText>
           </div>
           <div className="w-full flex flex-col items-center gap-2">
             <Image alt="" src={sampleChar} width={80} style={{ zIndex: 1 }} />
@@ -366,7 +377,7 @@ export default function Info() {
             <p className="font-bold text-center text-black text-[14px]">
               {fitChara2Title}
             </p>
-            <SectionText>{fitChara2Desc}</SectionText>
+            <SectionText align="left">{fitChara2Desc}</SectionText>
           </div>
         </div>
         <div className="h-5" />
@@ -377,25 +388,25 @@ export default function Info() {
         <div className="h-5" />
         <RedSectionTitle>私と仲良くなる秘訣</RedSectionTitle>
         <HorizontalLine />
-        <SectionText>{secretGetAlong}</SectionText>
+        <div className="m-3">
+          <SectionText align="left">{secretGetAlong}</SectionText>
+        </div>
       </WhiteCard>
 
       {/* Card Five */}
       <WhiteCard>
         <p className="text-[#B696C2] font-semibold text-[14px] text-center">
-          MBTIの結果と比べてみよう あなたの生まれつきの素養をMBTIでいうと
+          MBTIの結果と比べてみよう
+          <br /> あなたの生まれつきの素養をMBTIでいうと
         </p>
-        <div className="flex flex-col items-center mt-4 mb-2">
-          <Image alt="" src={sampleChar} width={80} style={{ zIndex: 1 }} />
-        </div>
         <p className="font-semibold text-[24px] text-[#56A278] text-center">
           {card5Title}
         </p>
         <SectionText>{card5SubTitle}</SectionText>
-        <p className="text-[#B696C2] font-semibold text-[12px] text-center">
+        <HorizontalLine />
+        <p className="text-[#B696C2] font-semibold text-[12px] text-center mt-5">
           MBTI式嗜好性パラメーター
         </p>
-        <HorizontalLine />
         <div className="h-5" />
         <ColouredProgressIndicator
           color="#6894AE"
@@ -477,19 +488,19 @@ export default function Info() {
             <GoldenSectionTitle>トリセツその１</GoldenSectionTitle>
             <HorizontalLine />
             <SectionText>{toreitsu1}</SectionText>
-            <SectionText>{toreitsu1Desc}</SectionText>
+            <SectionText align="left">{toreitsu1Desc}</SectionText>
             <div className="h-5" />
 
             <GoldenSectionTitle>トリセツその２</GoldenSectionTitle>
             <HorizontalLine />
             <SectionText>{toreitsu2}</SectionText>
-            <SectionText>{toreitsu2Desc}</SectionText>
+            <SectionText align="left">{toreitsu2Desc}</SectionText>
             <div className="h-5" />
 
             <GoldenSectionTitle>トリセツその３</GoldenSectionTitle>
             <HorizontalLine />
             <SectionText>{toreitsu3}</SectionText>
-            <SectionText>{toreitsu3Desc}</SectionText>
+            <SectionText align="left">{toreitsu3Desc}</SectionText>
             <div className="h-5" />
           </WhiteCard>
         </div>
