@@ -1,14 +1,38 @@
+import React from "react";
 import { sampleChar } from "@/assets";
 import Image from "next/image";
 
+const WhiteCard = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div
+      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-3 px-4"
+      style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25);" }}
+    >
+      {children}
+    </div>
+  );
+};
+
+const RedSectionTitle = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-[#EC736E] text-center font-semibold text-[14px]">
+    {children}
+  </p>
+);
+
+const HorizontalLine = () => <div className="h-[0.4px] w-full bg-black" />;
+
 export default function Info() {
+  // Top Card
   const mainColor = "#92BB77";
   const userName = "テリー伊藤";
   const personalChara = "山の好奇心旺盛なコンサルタント";
   const catchTitle =
     "「山の好奇心旺盛なコンサルタント、知識の泉で未来を切り開く！学び続ける探求者の旅は終わらない！」";
+  // Card One
+  const nativeScore = 20;
   return (
-    <div className="mx-auto max-w-[450px] w-full flex flex-col items-center  min-h-[100svh]">
+    <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5  min-h-[100svh]">
+      {/* Top Card */}
       <div
         className="w-[95%] mx-auto flex flex-col gap-4 bg-white rounded-br-[20px] rounded-bl-[20px] min-h-[460px] overflow-hidden relative"
         style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
@@ -44,6 +68,76 @@ export default function Info() {
           />
         </div>
       </div>
+      {/* Card One */}
+      <WhiteCard>
+        <RedSectionTitle>あなたのnative. スコア</RedSectionTitle>
+        <HorizontalLine />
+        <div className="flex flex-row gap-4 items-start">
+          <p className="text-[42px] font-bold" style={{ color: mainColor }}>
+            {nativeScore}
+          </p>
+          <div className="w-full flex flex-col gap-2 mt-3">
+            <div
+              className="h-[12px] rounded-full overflow-hidden flex flex-row items-center relative"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(142,135,227,1) 0%, rgba(187,135,227,1) 35%, rgba(227,135,213,1) 100%)",
+              }}
+            >
+              <div
+                className="w-[15px] h-[15px] bg-[#EC736E] rounded-full absolute "
+                style={{
+                  border: "3px solid #fff",
+                  left: `${(nativeScore / 36) * 100}%`,
+                }}
+              />
+            </div>
+            <div className="w-full grid grid-cols-3 gap-1">
+              <div className="w-full flex flex-col gap-1 items-center">
+                <div className="flex flex-row items-center justify-between w-full">
+                  <p className="font-semibold text-[#aaa] text-[12px]">
+                    3 (最小)
+                  </p>
+                  <p
+                    className="font-semibold text-[#aaa] text-[12px] pr-1"
+                    style={{ borderRight: "0.4px solid #aaa" }}
+                  >
+                    12
+                  </p>
+                </div>
+                <p className="font-semibold text-[#aaa] text-[12px]">
+                  研究者気質
+                </p>
+              </div>
+              <div className="w-full flex flex-col gap-1 items-center">
+                <div className="flex flex-row items-center justify-between w-full">
+                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
+                  <p
+                    className="font-semibold text-[#aaa] text-[12px] pr-1"
+                    style={{ borderRight: "0.4px solid #aaa" }}
+                  >
+                    23
+                  </p>
+                </div>
+                <p className="font-semibold text-[#aaa] text-[12px]">
+                  管理職気質
+                </p>
+              </div>
+              <div className="w-full flex flex-col gap-1 items-center">
+                <div className="flex flex-row items-center justify-between w-full">
+                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
+                  <p className="font-semibold text-[#aaa] text-[12px]">
+                    (最大) 36
+                  </p>
+                </div>
+                <p className="font-semibold text-[#aaa] text-[12px]">
+                  起業家気質
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </WhiteCard>
     </div>
   );
 }
