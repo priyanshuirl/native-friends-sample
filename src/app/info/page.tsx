@@ -9,6 +9,7 @@ import {
   shareIcon,
   xIcon,
 } from "@/assets/social";
+import { logo } from "@/assets/brand";
 
 const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -23,6 +24,12 @@ const WhiteCard = ({ children }: { children: React.ReactNode }) => {
 
 const RedSectionTitle = ({ children }: { children: React.ReactNode }) => (
   <p className="text-[#EC736E] text-center font-semibold text-[14px]">
+    {children}
+  </p>
+);
+
+const GoldenSectionTitle = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-[#E6B422] text-center font-semibold text-[14px]">
     {children}
   </p>
 );
@@ -161,6 +168,17 @@ export default function Info() {
   const demotivationMoment3 = "知識が役立たなかったとき    ";
   const demotivationMoment3Desc =
     "「この情報、使えないじゃん」と感じると、心の中で「何のために学んだんだ…」と落ち込む。";
+
+  //Card Nine
+  const toreitsu1 = "堅実さと信頼性";
+  const toreitsu1Desc =
+    "木の要素と真面目なマネージャーを持つ人は、まさに「堅実さ」の象徴です。計画をたて、その通りに進ことに長けています。スケジュール通りに動き、約束したことを必ず守る姿勢は、周囲から絶大な信頼を得ます。例えば、友達との約束も、仕事の締め切りも、決して忘れることはありません。「この人に任せておけば安心」という言葉は、まさにそのためにあります。";
+  const toreitsu2 = "自立心と責任感";
+  const toreitsu2Desc =
+    "木の要素と真面目なマネージャーを持つ人は、まさに「堅実さ」の象徴です。計画をたて、その通りに進ことに長けています。スケジュール通りに動き、約束したことを必ず守る姿勢は、周囲から絶大な信頼を得ます。例えば、友達との約束も、仕事の締め切りも、決して忘れることはありません。「この人に任せておけば安心」という言葉は、まさにそのためにあります。";
+  const toreitsu3 = "素直さと誠実さ";
+  const toreitsu3Desc =
+    "木の要素と真面目なマネージャーを持つ人は、まさに「堅実さ」の象徴です。計画をたて、その通りに進ことに長けています。スケジュール通りに動き、約束したことを必ず守る姿勢は、 周囲から絶大な信頼を得ます。例えば、友達との約束も、仕事の締め切りも、決して忘れることはありません。「この人に任せておけば安心」という言葉は、まさにそのためにあります。";
 
   return (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
@@ -487,6 +505,33 @@ export default function Info() {
         <SectionText>{demotivationMoment3Desc}</SectionText>
         <div className="h-5" />
       </WhiteCard>
+
+      {/* Card Nine */}
+      <WhiteCard>
+        <GoldenSectionTitle>トリセツその１</GoldenSectionTitle>
+        <HorizontalLine />
+        <SectionText>{toreitsu1}</SectionText>
+        <SectionText>{toreitsu1Desc}</SectionText>
+        <div className="h-5" />
+
+        <GoldenSectionTitle>トリセツその２</GoldenSectionTitle>
+        <HorizontalLine />
+        <SectionText>{toreitsu2}</SectionText>
+        <SectionText>{toreitsu2Desc}</SectionText>
+        <div className="h-5" />
+
+        <GoldenSectionTitle>トリセツその３</GoldenSectionTitle>
+        <HorizontalLine />
+        <SectionText>{toreitsu3}</SectionText>
+        <SectionText>{toreitsu3Desc}</SectionText>
+        <div className="h-5" />
+      </WhiteCard>
+      <div className="flex flex-col items-center mt-10 mb-1">
+        <Image alt="" src={logo} width={150} style={{ zIndex: 1 }} />
+      </div>
+      <p className="text-center text-[8px] text-[#A1A1AA]">
+        © 2024 native.K.K All Rights Reserved.
+      </p>
     </div>
   );
 }
