@@ -1,6 +1,14 @@
 import React from "react";
 import { sampleChar } from "@/assets";
 import Image from "next/image";
+import { snsSectionQRCode } from "@/assets/qrCodes";
+import {
+  facebookIcon,
+  instagramIcon,
+  lineIcon,
+  shareIcon,
+  xIcon,
+} from "@/assets/social";
 
 const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -170,6 +178,7 @@ export default function Info() {
           />
         </div>
       </div>
+
       {/* Card One */}
       <WhiteCard>
         <RedSectionTitle>あなたのnative. スコア</RedSectionTitle>
@@ -240,6 +249,7 @@ export default function Info() {
           </div>
         </div>
       </WhiteCard>
+
       {/* Card Two */}
       <WhiteCard>
         <RedSectionTitle>パーソナリティ</RedSectionTitle>
@@ -259,6 +269,7 @@ export default function Info() {
           <SectionText>{kanji3}</SectionText>
         </div>
       </WhiteCard>
+
       {/* Card Three */}
       <WhiteCard>
         <RedSectionTitle>テンションUPする瞬間</RedSectionTitle>
@@ -271,6 +282,7 @@ export default function Info() {
         <SectionText>{demotivationMoment1}</SectionText>
         <SectionText>{demotivationMoment1Desc}</SectionText>
       </WhiteCard>
+
       {/* Card Four */}
       <WhiteCard>
         <RedSectionTitle>相性の良いキャラクター</RedSectionTitle>
@@ -315,6 +327,7 @@ export default function Info() {
         <HorizontalLine />
         <SectionText>{secretGetAlong}</SectionText>
       </WhiteCard>
+
       {/* Card Five */}
       <WhiteCard>
         <p className="text-[#B696C2] font-semibold text-[14px] text-center">
@@ -368,6 +381,59 @@ export default function Info() {
           endIndicator="慎重型"
         />
       </WhiteCard>
+
+      {/* Card Six */}
+      <WhiteCard>
+        <div className="flex flex-col items-center mt-5 mb-8">
+          <Image
+            alt=""
+            src={snsSectionQRCode}
+            width={150}
+            style={{ zIndex: 1 }}
+          />
+        </div>
+        <SectionText>native.をSNSでシェア、相性診断</SectionText>
+        <div className="mt-2 flex w-full flex-row justify-center gap-3 items-center mb-2">
+          <div
+            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
+            style={{ border: "0.6px solid #000" }}
+          >
+            <Image alt="" src={xIcon} width={30} style={{ zIndex: 1 }} />
+          </div>
+          <div
+            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
+            style={{ border: "0.6px solid #000" }}
+          >
+            <Image
+              alt=""
+              src={instagramIcon}
+              width={30}
+              style={{ zIndex: 1 }}
+            />
+          </div>
+          <div
+            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
+            style={{ border: "0.6px solid #000" }}
+          >
+            <Image alt="" src={lineIcon} width={30} style={{ zIndex: 1 }} />
+          </div>
+          <div
+            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
+            style={{ border: "0.6px solid #000" }}
+          >
+            <Image alt="" src={facebookIcon} width={30} style={{ zIndex: 1 }} />
+          </div>
+          <div
+            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
+            style={{ border: "0.6px solid #000" }}
+          >
+            <Image alt="" src={shareIcon} width={30} style={{ zIndex: 1 }} />
+          </div>
+        </div>
+      </WhiteCard>
+      <button className="my-4 border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px]">
+        <p className="text-white text-[16px] font-semibold">さらに深く見る</p>
+      </button>
     </div>
   );
 }
