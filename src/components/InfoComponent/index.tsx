@@ -165,8 +165,8 @@ export default function InfoComponent({
   const personalHash3 = `#${data?.param4?.split("#")?.[3]}`;
   const personality1 = data?.param5;
   const kanji1 = `#${data?.param7?.split("#")?.[1]}`;
-  const kanji2 = `#${data?.param7?.split("#")?.[1]}`;
-  const kanji3 = `#${data?.param7?.split("#")?.[1]}`;
+  const kanji2 = `#${data?.param7?.split("#")?.[2]}`;
+  const kanji3 = `#${data?.param7?.split("#")?.[3]}`;
 
   // Card Three
   const motivationMoment1 = data?.param8;
@@ -183,8 +183,10 @@ export default function InfoComponent({
   const fitChara2Hash2 = `#${data?.best_partner_hashtag2?.split("#")?.[2]}`;
   const fitChara2Title = data?.best_partner_text_2;
 
-  const getAlongScore1 = Number(nativeScore) - 5;
-  const getAlongScore2 = Number(nativeScore) + 5;
+  const getAlongScore1 =
+    Number(nativeScore) - 5 < 3 ? 3 : Number(nativeScore) - 5;
+  const getAlongScore2 =
+    Number(nativeScore) + 5 > 36 ? 36 : Number(nativeScore) + 5;
   const secretGetAlong = data?.param12;
 
   //Card Five
@@ -228,7 +230,7 @@ export default function InfoComponent({
 
   const handleCompatible = () => {
     router.push(
-      `/?referrer-name=${referrerName}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
+      `/compatibility/?referrer-name=${referrerName}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
     );
   };
 
