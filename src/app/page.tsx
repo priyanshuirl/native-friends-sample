@@ -13,6 +13,7 @@ import {
 } from "@/assets";
 import { CustomInput } from "@/components/CustomInput";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const topCharacters = [
@@ -32,10 +33,14 @@ const bottomCharacters = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<string>("");
+
+  const handleClick = () => router.push(`/info?name=${name}&dob=${date}`);
+
   return (
-    <div className="max-w-[450px] m-auto flex flex-col justify-between items-center h-[100svh] bg-white">
+    <div className="max-w-[450px] m-auto flex flex-col justify-between items-center min-h-[100svh] bg-white">
       <div className="flex flex-col items-center gap-10 w-full">
         <h1 className="text-black text-center text-[28px] font-bold mt-10">
           native. for friends
@@ -72,7 +77,10 @@ export default function Home() {
             type="date"
           />
         </div>
-        <button className="rounded-[18px] bg-[#696969] w-[140px] h-[56px] px-[16px] py-[12px] text-white">
+        <button
+          className="rounded-[18px] bg-[#696969] w-[140px] h-[56px] px-[16px] py-[12px] text-white"
+          onClick={handleClick}
+        >
           発行する
         </button>
         <p className="text-black text-[12px] font-semibold">native. 1.8.3</p>
