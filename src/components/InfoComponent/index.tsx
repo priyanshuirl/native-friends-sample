@@ -10,6 +10,7 @@ import {
   xIcon,
 } from "@/assets/social";
 import { logo } from "@/assets/brand";
+import { useRouter } from "next/navigation";
 
 const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -104,10 +105,19 @@ const ColouredProgressIndicator = ({
 export default function InfoComponent({
   dob: { date, month, year },
   name,
+  shared = false,
+  isReferred = false,
+  referrerName,
+  referrerDOB,
 }: {
   name: string;
   dob: { year: string; month: string; date: string };
+  shared?: boolean;
+  isReferred?: boolean;
+  referrerName?: string;
+  referrerDOB?: { year: string; month: string; date: string };
 }) {
+  const router = useRouter();
   const [isReadMoreHidden, setIsReadMoreHidden] = useState<boolean>(true);
   const [hideButton, setHideButton] = useState<boolean>(false);
   const [data, setData] = useState<any>();
@@ -200,12 +210,42 @@ export default function InfoComponent({
   const toreitsu3 = data?.param17;
   const toreitsu3Desc = data?.param18;
 
+  const shareLink = `${
+    window.location.origin
+  }/info/share/${name}/${`${year}-${month}-${date}`}`;
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(shareLink);
+    alert("Link copied to clipboard!");
+  };
+
+  const handleIssueInstantly = () => {
+    router.push(
+      `/?referrer-name=${name}&referrer-dob=${`${year}-${month}-${date}`}`
+    );
+  };
+
+  const handleCompatible = () => {
+    router.push(
+      `/?referrer-name=${referrerName}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
+    );
+  };
+
   return isLoading ? (
     <div className="min-h-[100svh] w-full flex flex-col items-center justify-center gap-2">
       <p className="text-[24px] font-bold text-neutral-800">読み込み中...</p>
     </div>
   ) : (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
+      {shared ? (
+        <button
+          className="fixed bottom-0 left-[50%] text-[18px] bg-[#EC736E] text-white w-[200px] h-[50px] flex items-center justify-center rounded-[16px]"
+          style={{ transform: "translate(-50%,-50%)", zIndex: 9 }}
+          onClick={handleIssueInstantly}
+        >
+          今すぐ発行⁨⁩⁨⁩ ▶︎
+        </button>
+      ) : null}
       {/* Top Card */}
       <div
         className="w-[95%] mx-auto flex flex-col gap-4 bg-white rounded-br-[20px] rounded-bl-[20px] min-h-[460px] overflow-hidden relative"
@@ -506,6 +546,8 @@ export default function InfoComponent({
       </div>
       {/* Card Six */}
       <WhiteCard>
+        <div className="h-5" />
+        <SectionText>スキャンして共有</SectionText>
         <div className="flex flex-col items-center mt-5 mb-8">
           <Image
             alt=""
@@ -548,16 +590,30 @@ export default function InfoComponent({
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
+            onClick={handleCopyLink}
           >
             <Image alt="" src={shareIcon} width={30} style={{ zIndex: 1 }} />
           </div>
         </div>
       </WhiteCard>
 
+      <div className="h-5" />
+
+      {isReferred ? (
+        <button
+          onClick={handleCompatible}
+          className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-[#EC736E] opacity-85 rounded-[20px]"
+        >
+          <p className="text-white text-[16px] font-semibold">
+            ◯◯さんとの相性を見る
+          </p>
+        </button>
+      ) : null}
+
       {hideButton ? null : (
         <button
           onClick={handleReadMore}
-          className="my-4 border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px]"
+          className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px]"
         >
           <p className="text-white text-[16px] font-semibold">さらに深く見る</p>
         </button>

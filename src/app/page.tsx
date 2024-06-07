@@ -13,7 +13,7 @@ import {
 } from "@/assets";
 import { CustomInput } from "@/components/CustomInput";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const topCharacters = [
@@ -33,11 +33,23 @@ const bottomCharacters = [
 ];
 
 export default function Home() {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<string>("");
 
-  const handleClick = () => router.push(`/info?name=${name}&dob=${date}`);
+  const referrerName = searchParams.get("referrer-name") as string;
+  const referrerDOB = searchParams.get("referrer-dob") as string;
+
+  const handleClick = () => {
+    if (referrerName?.length > 1 && referrerDOB?.length > 1) {
+      router.push(
+        `/info/referred/${referrerName}/${referrerDOB}/?name=${name}&dob=${date}`
+      );
+    } else {
+      router.push(`/info?name=${name}&dob=${date}`);
+    }
+  };
 
   return (
     <div className="max-w-[450px] m-auto flex flex-col justify-between items-center min-h-[100svh] bg-white">
