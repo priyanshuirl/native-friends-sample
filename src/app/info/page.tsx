@@ -435,10 +435,10 @@ export default function Info() {
       </WhiteCard>
       <div className="overflow-hidden">
         <div
-          className="flex flex-col items-center gap-5 "
+          className="flex flex-col items-center gap-5 pb-5"
           style={{
             marginBottom: isReadMoreHidden ? "-2000px" : "0px",
-            transition: "2s ease",
+            transition: "1.5s ease",
           }}
         >
           {/* Card Seven */}
