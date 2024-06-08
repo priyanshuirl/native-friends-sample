@@ -56,8 +56,7 @@ const SectionText = ({
         </b>
       ) : (
         <p
-          className="text-black  font-semibold text-[12px]"
-          style={{ textAlign: align }}
+          className="text-black text-left  font-normal text-[12px]"
           dangerouslySetInnerHTML={{ __html: content as any }}
         />
       );
