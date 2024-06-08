@@ -17,7 +17,7 @@ const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-3 px-4"
-      style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25);" }}
+      style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
     >
       {children}
     </div>
@@ -230,7 +230,7 @@ export default function InfoComponent({
 
   const handleCompatible = () => {
     router.push(
-      `/compatibility/?referrer-name=${referrerName}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
+      `/compatibility?referrer-name=${referrerName}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
     );
   };
 
