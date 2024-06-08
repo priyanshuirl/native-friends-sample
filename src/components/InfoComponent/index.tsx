@@ -73,7 +73,7 @@ const ColouredProgressIndicator = ({
         <div
           className=" absolute top-[-36px]"
           style={{
-            left: `calc(${percentage}% - 60px)`,
+            left: `calc(${percentage}% - 80px)`,
           }}
         >
           <p className="text-[14px] font-bold">
