@@ -40,7 +40,8 @@ export default function Home() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [name, setName] = useState<string>("");
-  const [date, setDate] = useState<string>("");
+  const [date, setDate] = useState<string | null>(null);
+  const [dateInputVal, setDateInputVal] = useState<any>(null);
 
   const referrerName = searchParams.get("referrer-name") as string;
   const referrerDOB = searchParams.get("referrer-dob") as string;
@@ -91,13 +92,18 @@ export default function Home() {
             {"生年月日を入力してください"}
           </p>
           <DatePicker
-            onChange={(value) =>
-              setDate(new Date(`${value}`).toISOString()?.split("T")?.[0])
-            }
-            value={date}
+            onChange={(value) => {
+              setDate(new Date(`${value}`).toISOString()?.split("T")?.[0]);
+              setDateInputVal(value);
+            }}
+            value={dateInputVal}
             maxDate={new Date("2999-12-31")}
-            format="yyyy-MM-dd"
+            minDate={new Date("1000-12-31")}
+            format="y-MM-d"
             clearIcon={null}
+            dayPlaceholder="dd"
+            monthPlaceholder="mm"
+            yearPlaceholder="yyyy"
           />
         </div>
         <button
