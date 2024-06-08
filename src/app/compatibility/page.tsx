@@ -10,6 +10,40 @@ import {
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import {
+  buildStyles,
+  CircularProgressbarWithChildren,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
+function blendColors(
+  colorA: string = "",
+  colorB: string = "",
+  amount: number = 0.5
+) {
+  const val1 = (colorA as any)
+    ?.match(/\w\w/g)
+    ?.map((c: any) => parseInt(c, 16));
+  const rA = val1?.[0];
+  const gA = val1?.[0];
+  const bA = val1?.[0];
+  const val2 = (colorB as any)
+    ?.match(/\w\w/g)
+    ?.map((c: any) => parseInt(c, 16));
+  const rB = val2?.[0];
+  const gB = val2?.[0];
+  const bB = val2?.[0];
+  const r = Math.round(rA + (rB - rA) * amount)
+    .toString(16)
+    .padStart(2, "0");
+  const g = Math.round(gA + (gB - gA) * amount)
+    .toString(16)
+    .padStart(2, "0");
+  const b = Math.round(bA + (bB - bA) * amount)
+    .toString(16)
+    .padStart(2, "0");
+  return "#" + r + g + b;
+}
 
 function addAlpha(color: string, opacity: number) {
   var _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
@@ -53,6 +87,16 @@ export default function Compatibility() {
   const [selfData, setSelfData] = useState<any>();
   const [referrerData, setReferrerData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [progressValue, setProgressValue] = useState<number>(0);
+  const [compatibilityData, setCompatibilityData] = useState<any>();
+
+  useEffect(() => {
+    setProgressValue(0);
+    const timer = setTimeout(() => {
+      setProgressValue(compatibilityData?.score);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [compatibilityData]);
 
   const selfUsername = searchParams.get("self-name");
   const referrerUsername = searchParams.get("referrer-name");
@@ -75,6 +119,17 @@ export default function Compatibility() {
       }`}`
     );
     const apiDataReferrer = await apiResponseReferrer.json();
+    const apiResponseCompatibility = await fetch(
+      `https://card.stg.be-native.life:8443/friends/matchin_data/${`${
+        searchParams.get("referrer-dob")?.split("-")?.[0]
+      }`}/${`${searchParams.get("referrer-dob")?.split("-")?.[1]}`}/${`${
+        searchParams.get("referrer-dob")?.split("-")?.[2]
+      }`}/and/${`${searchParams.get("self-dob")?.split("-")?.[0]}`}/${`${
+        searchParams.get("self-dob")?.split("-")?.[1]
+      }`}/${`${searchParams.get("self-dob")?.split("-")?.[2]}`}`
+    );
+    const apiDataCompatibility = await apiResponseCompatibility.json();
+    setCompatibilityData(apiDataCompatibility);
     setSelfData(apiDataSelf);
     setReferrerData(apiDataReferrer);
     setIsLoading(false);
@@ -96,8 +151,7 @@ export default function Compatibility() {
   const selfType = selfData?.param1;
   const referrerType = referrerData?.param1;
 
-  const compatibilityText =
-    "相性は程よく、違いも楽しめる関係性。お互いを知れば知るほど、面白いことが見つかる予感。これからの友情が楽しみ！";
+  const compatibilityText = compatibilityData?.text_data;
 
   const selfCard1Text = selfData?.param21;
   const referrerCard1Text = referrerData?.param21;
@@ -133,7 +187,33 @@ export default function Compatibility() {
           </div>
         </div>
         {/* Section One */}
-        <div className="w-full grid grid-cols-2">
+        <div className="w-full grid grid-cols-2 relative">
+          <div
+            className="absolute top-[50%] left-[50%] w-[110px]"
+            style={{ transform: "translate(-50%,-40%)" }}
+          >
+            <CircularProgressbarWithChildren
+              value={progressValue}
+              strokeWidth={14}
+              styles={buildStyles({
+                pathColor: blendColors(selfColor, referrerColor, 0.5),
+                trailColor: "#E5E5E5",
+                pathTransitionDuration: 0.5,
+              })}
+            >
+              <div
+                style={{ fontSize: 12 }}
+                className="bg-white h-[75%] w-[75%] rounded-full flex flex-col items-center justify-center"
+              >
+                <p className="text-black font-semibold text-center text-[8px] w-[40px]">
+                  ふたりのフィット感
+                </p>
+                <p className="text-center text-[#EC736E] text-[22px] font-extrabold">
+                  {progressValue}%
+                </p>
+              </div>
+            </CircularProgressbarWithChildren>
+          </div>
           <div
             className="w-full flex flex-col gap-3 items-center px-5 pb-5"
             style={{
