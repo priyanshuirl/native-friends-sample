@@ -95,6 +95,7 @@ export default function Home() {
               setDate(new Date(`${value}`).toISOString()?.split("T")?.[0])
             }
             value={date}
+            maxDate={new Date("2999-12-31")}
             format="yyyy-MM-dd"
             clearIcon={null}
           />
