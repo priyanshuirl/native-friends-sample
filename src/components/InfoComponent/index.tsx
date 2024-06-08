@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { snsSectionQRCode } from "@/assets/qrCodes";
 import {
   facebookIcon,
   instagramIcon,
@@ -213,9 +212,9 @@ export default function InfoComponent({
   const toreitsu3 = data?.param17;
   const toreitsu3Desc = data?.param18;
 
-  const shareLink = `${
-    window.location.origin
-  }/info/share/${name}/${`${year}-${month}-${date}`}`;
+  const shareLink = `${window.location.origin}/info/share/${encodeURIComponent(
+    name
+  )}/${`${year}-${month}-${date}`}`;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(shareLink);
@@ -224,13 +223,17 @@ export default function InfoComponent({
 
   const handleIssueInstantly = () => {
     router.push(
-      `/?referrer-name=${name}&referrer-dob=${`${year}-${month}-${date}`}`
+      `/?referrer-name=${encodeURIComponent(
+        name
+      )}&referrer-dob=${`${year}-${month}-${date}`}`
     );
   };
 
   const handleCompatible = () => {
     router.push(
-      `/compatibility?referrer-name=${referrerName}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
+      `/compatibility?referrer-name=${encodeURIComponent(
+        `${referrerName}`
+      )}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
     );
   };
 
@@ -407,7 +410,10 @@ export default function InfoComponent({
               height={120}
               style={{ zIndex: 1 }}
             />
-            <p className="text-[#92BB77] text-[12px] font-semibold text-center">
+            <p
+              className="text-[16px] font-semibold text-center"
+              style={{ color: data?.hex1 }}
+            >
               {fitChara1}
             </p>
             <div className="flex flex-row items-center justify-center gap-4">
@@ -424,7 +430,10 @@ export default function InfoComponent({
               height={120}
               style={{ zIndex: 1 }}
             />
-            <p className="text-[#92BB77] text-[12px] font-semibold text-center">
+            <p
+              className="text-[16px] font-semibold text-center"
+              style={{ color: data?.hex2 }}
+            >
               {fitChara2}
             </p>
             <div className="flex flex-row items-center justify-center gap-4">
@@ -564,10 +573,15 @@ export default function InfoComponent({
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
+            onClick={() =>
+              window.open(
+                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${name}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${shareLink}&hashtags=native.,#nativeで繋がろう,MBTI`
+              )
+            }
           >
             <Image alt="" src={xIcon} width={30} style={{ zIndex: 1 }} />
           </div>
-          <div
+          {/* <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
           >
@@ -577,19 +591,19 @@ export default function InfoComponent({
               width={30}
               style={{ zIndex: 1 }}
             />
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
           >
             <Image alt="" src={lineIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
           >
             <Image alt="" src={facebookIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
+          </div> */}
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}

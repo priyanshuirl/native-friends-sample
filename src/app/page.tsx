@@ -15,6 +15,10 @@ import { CustomInput } from "@/components/CustomInput";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import DatePicker from "react-date-picker";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+import "./DatePicker.css";
 
 const topCharacters = [
   greenChar,
@@ -44,7 +48,9 @@ export default function Home() {
   const handleClick = () => {
     if (referrerName?.length > 1 && referrerDOB?.length > 1) {
       router.push(
-        `/info/referred/${referrerName}/${referrerDOB}/?name=${name}&dob=${date}`
+        `/info/referred/${encodeURIComponent(
+          referrerName
+        )}/${encodeURIComponent(referrerDOB)}/?name=${name}&dob=${date}`
       );
     } else {
       router.push(`/info?name=${name}&dob=${date}`);
@@ -81,12 +87,16 @@ export default function Home() {
             placeholder="お名前"
             type="text"
           />
-          <CustomInput
-            label="生年月日を入力してください"
-            onChange={(value) => setDate(value as string)}
+          <p className="text-[12px] text-black font-normal mb-[-12px]">
+            {"生年月日を入力してください"}
+          </p>
+          <DatePicker
+            onChange={(value) =>
+              setDate(new Date(`${value}`).toISOString()?.split("T")?.[0])
+            }
             value={date}
-            placeholder="YYY-MMM-DD"
-            type="date"
+            format="yyyy-MM-dd"
+            clearIcon={null}
           />
         </div>
         <button
