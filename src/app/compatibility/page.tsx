@@ -196,7 +196,7 @@ export default function Compatibility() {
               value={progressValue}
               strokeWidth={14}
               styles={buildStyles({
-                pathColor: blendColors(selfColor, referrerColor, 0.5),
+                // pathColor: blendColors(selfColor, referrerColor, 0.5),
                 trailColor: "#E5E5E5",
                 pathTransitionDuration: 0.5,
               })}
