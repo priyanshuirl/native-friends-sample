@@ -43,13 +43,33 @@ const SectionText = ({
 }: {
   children: React.ReactNode;
   align?: "center" | "left";
-}) => (
-  <p
-    className="text-black  font-semibold text-[12px]"
-    style={{ textAlign: align }}
-    dangerouslySetInnerHTML={{ __html: children as any }}
-  />
-);
+}) => {
+  if ((children as string)?.includes("<br/>")) {
+    return (children as string)?.split("<br/>")?.map((content, index) => {
+      return index % 2 === 0 ? (
+        <p
+          className="text-black font-extrabold text-[16px] my-1"
+          style={{ textAlign: align, fontWeight: 900 }}
+          dangerouslySetInnerHTML={{ __html: content as any }}
+        />
+      ) : (
+        <p
+          className="text-black  font-semibold text-[12px]"
+          style={{ textAlign: align }}
+          dangerouslySetInnerHTML={{ __html: content as any }}
+        />
+      );
+    });
+  } else {
+    return (
+      <p
+        className="text-black  font-semibold text-[12px]"
+        style={{ textAlign: align }}
+        dangerouslySetInnerHTML={{ __html: children as any }}
+      />
+    );
+  }
+};
 
 const ColouredProgressIndicator = ({
   color,
@@ -64,6 +84,7 @@ const ColouredProgressIndicator = ({
   startIndicator: string;
   endIndicator: string;
 }) => {
+  const percentageToBeUsed = percentage > 100 ? 100 : percentage;
   return (
     <div className="w-full flex flex-row items-center h-[56px] my-1">
       <p className="text-[10px] text-[#AAA] font-semibold min-w-[70px] mt-10">
@@ -73,24 +94,27 @@ const ColouredProgressIndicator = ({
         <div
           className=" absolute top-[-36px]"
           style={{
-            left: `calc(${percentage}% - 80px)`,
+            left:
+              type === "自己主張型"
+                ? `calc(${percentageToBeUsed}% - 120px)`
+                : `calc(${percentageToBeUsed}% - 80px)`,
           }}
         >
           <p className="text-[14px] font-bold">
-            <span style={{ color }}>{`${percentage}%`}</span> {type}
+            <span style={{ color }}>{`${percentageToBeUsed}%`}</span> {type}
           </p>
         </div>
         <div
           className="w-[28px] h-[28px] rounded-full absolute top-[-7.7px]"
           style={{
-            left: `calc(${percentage}% - 20px)`,
+            left: `calc(${percentageToBeUsed}% - 20px)`,
             background: color,
           }}
         />
         <div className="flex flex-row items-center h-[14px] bg-[#E5E5E5] rounded-full w-full overflow-hidden">
           <div
             className="h-full "
-            style={{ width: `${percentage}%`, background: color }}
+            style={{ width: `${percentageToBeUsed}%`, background: color }}
           />
         </div>
       </div>

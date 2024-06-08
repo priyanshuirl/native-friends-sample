@@ -74,13 +74,33 @@ const SectionText = ({
 }: {
   children: React.ReactNode;
   align?: "center" | "left";
-}) => (
-  <p
-    className="text-black  font-semibold text-[12px]"
-    style={{ textAlign: align }}
-    dangerouslySetInnerHTML={{ __html: children as any }}
-  />
-);
+}) => {
+  if ((children as string)?.includes("<br/>")) {
+    return (children as string)?.split("<br/>")?.map((content, index) => {
+      return index % 2 === 0 ? (
+        <p
+          className="text-black font-extrabold text-[16px]"
+          style={{ textAlign: align, fontWeight: 900 }}
+          dangerouslySetInnerHTML={{ __html: content as any }}
+        />
+      ) : (
+        <p
+          className="text-black  font-semibold text-[12px]"
+          style={{ textAlign: align }}
+          dangerouslySetInnerHTML={{ __html: content as any }}
+        />
+      );
+    });
+  } else {
+    return (
+      <p
+        className="text-black  font-semibold text-[12px]"
+        style={{ textAlign: align }}
+        dangerouslySetInnerHTML={{ __html: children as any }}
+      />
+    );
+  }
+};
 
 export default function Compatibility() {
   const searchParams = useSearchParams();

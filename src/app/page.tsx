@@ -93,7 +93,9 @@ export default function Home() {
           </p>
           <DatePicker
             onChange={(value) => {
-              setDate(new Date(`${value}`).toISOString()?.split("T")?.[0]);
+              const dateObj = new Date(`${value}`);
+              dateObj.setHours(23);
+              setDate(new Date(`${dateObj}`).toISOString()?.split("T")?.[0]);
               setDateInputVal(value);
             }}
             value={dateInputVal}
