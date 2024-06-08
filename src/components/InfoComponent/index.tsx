@@ -73,12 +73,11 @@ const ColouredProgressIndicator = ({
         <div
           className=" absolute top-[-36px]"
           style={{
-            left: `calc(${percentage}% - 20px)`,
+            left: `calc(${percentage}% - 60px)`,
           }}
         >
           <p className="text-[14px] font-bold">
-            <span style={{ color }}>{`${percentage}%`}</span>
-            {type}
+            <span style={{ color }}>{`${percentage}%`}</span> {type}
           </p>
         </div>
         <div
@@ -203,26 +202,30 @@ export default function InfoComponent({
   const percentage4 = Object.values(mtbiData?.param_4 ?? {})?.[0] as number;
   const percentage5 = Object.values(mtbiData?.param_5 ?? {})?.[0] as number;
 
-  const percentage1Label =
-    (Object.keys(mtbiData?.param_1 ?? {})?.[0] as string) === "E"
-      ? "外交型"
-      : "内向型";
-  const percentage2Label =
-    (Object.keys(mtbiData?.param_2 ?? {})?.[0] as string) === "S"
-      ? "直感型"
-      : "観察型";
-  const percentage3Label =
-    (Object.keys(mtbiData?.param_3 ?? {})?.[0] as string) === "T"
-      ? "思考型"
-      : "感情型";
-  const percentage4Label =
-    (Object.keys(mtbiData?.param_4 ?? {})?.[0] as string) === "J"
-      ? "計画型"
-      : "探索型";
-  const percentage5Label =
-    (Object.keys(mtbiData?.param_5 ?? {})?.[0] as string) === "A"
-      ? "自己主張型"
-      : "慎重型";
+  const getPercentageLabel = (key: string) => {
+    switch (key) {
+      case "E":
+        return "外交型";
+      case "I":
+        return "内向型";
+      case "S":
+        return "直感型";
+      case "N":
+        return "観察型";
+      case "T":
+        return "思考型";
+      case "F":
+        return "感情型";
+      case "J":
+        return "計画型";
+      case "P":
+        return "探索型";
+      case "A":
+        return "自己主張型";
+      case "T":
+        return "慎重型";
+    }
+  };
 
   //Card Seven
   const personality2 = data?.param6;
@@ -501,35 +504,55 @@ export default function InfoComponent({
         <ColouredProgressIndicator
           color="#6894AE"
           percentage={percentage1}
-          type={percentage1Label}
+          type={
+            getPercentageLabel(
+              Object.keys(mtbiData?.param_1 ?? {})?.[0] as string
+            ) as string
+          }
           startIndicator="外交型"
           endIndicator="内向型"
         />
         <ColouredProgressIndicator
           color="#D5B260"
           percentage={percentage2}
-          type={percentage2Label}
+          type={
+            getPercentageLabel(
+              Object.keys(mtbiData?.param_2 ?? {})?.[0] as string
+            ) as string
+          }
           startIndicator="直感型"
           endIndicator="観察型"
         />
         <ColouredProgressIndicator
           color="#69A07B"
           percentage={percentage3}
-          type={percentage3Label}
+          type={
+            getPercentageLabel(
+              Object.keys(mtbiData?.param_3 ?? {})?.[0] as string
+            ) as string
+          }
           startIndicator="思考型"
           endIndicator="感情型"
         />
         <ColouredProgressIndicator
           color="#7D6494"
           percentage={percentage4}
-          type={percentage4Label}
+          type={
+            getPercentageLabel(
+              Object.keys(mtbiData?.param_4 ?? {})?.[0] as string
+            ) as string
+          }
           startIndicator="計画型"
           endIndicator="探索型"
         />
         <ColouredProgressIndicator
           color="#D16E6B"
           percentage={percentage5}
-          type={percentage5Label}
+          type={
+            getPercentageLabel(
+              Object.keys(mtbiData?.param_5 ?? {})?.[0] as string
+            ) as string
+          }
           startIndicator="自己主張型"
           endIndicator="慎重型"
         />
