@@ -248,7 +248,7 @@ export default function InfoComponent({
         return "探索型";
       case "A":
         return "自己主張型";
-      case "T":
+      case "B":
         return "慎重型";
     }
   };
