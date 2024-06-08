@@ -659,7 +659,9 @@ export default function InfoComponent({
       {/* Card Six */}
       <WhiteCard>
         <div className="h-5" />
-        <SectionText>スキャンして共有</SectionText>
+        <p className="text-black text-center font-semibold text-[16px]">
+          スキャンして相性診断
+        </p>
         <div className="flex flex-col items-center mt-5 mb-8 w-[60%] mx-auto">
           <QRCode
             size={256}
@@ -668,7 +670,9 @@ export default function InfoComponent({
             viewBox={`0 0 256 256`}
           />
         </div>
-        <SectionText>native.をSNSでシェア、相性診断</SectionText>
+        <p className="text-black text-center font-semibold text-[16px]">
+          native.をSNSでシェア、相性診断
+        </p>
         <div className="mt-2 flex w-full flex-row justify-center gap-3 items-center mb-2">
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
