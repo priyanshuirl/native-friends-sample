@@ -71,22 +71,25 @@ const SectionTitleBlack = ({ children }: { children: React.ReactNode }) => (
 const SectionText = ({
   children,
   align = "center",
+  thin = false,
 }: {
   children: React.ReactNode;
   align?: "center" | "left";
+  thin?: boolean;
 }) => {
   if ((children as string)?.includes("<br/>")) {
     return (children as string)?.split("<br/>")?.map((content, index) => {
       return index % 2 === 0 ? (
-        <p
-          className="text-black font-extrabold text-[16px]"
-          style={{ textAlign: align, fontWeight: 900 }}
-          dangerouslySetInnerHTML={{ __html: content as any }}
-        />
+        <b>
+          <p
+            className="text-black font-bold text-[16px] my-1"
+            style={{ textAlign: align }}
+            dangerouslySetInnerHTML={{ __html: content as any }}
+          />
+        </b>
       ) : (
         <p
-          className="text-black  font-semibold text-[12px]"
-          style={{ textAlign: align }}
+          className="text-black text-left  font-normal text-[12px]"
           dangerouslySetInnerHTML={{ __html: content as any }}
         />
       );
@@ -94,8 +97,8 @@ const SectionText = ({
   } else {
     return (
       <p
-        className="text-black  font-semibold text-[12px]"
-        style={{ textAlign: align }}
+        className="text-black  text-[12px]"
+        style={{ textAlign: align, fontWeight: thin ? 400 : 600 }}
         dangerouslySetInnerHTML={{ __html: children as any }}
       />
     );
@@ -119,7 +122,9 @@ export default function Compatibility() {
   }, [compatibilityData]);
 
   const selfUsername = searchParams.get("self-name");
-  const referrerUsername = searchParams.get("referrer-name");
+  const referrerUsername = decodeURIComponent(
+    `${searchParams.get("referrer-name")}`
+  );
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -304,7 +309,7 @@ export default function Compatibility() {
           </div>
         </div>
         <div className="flex flex-col items-center mx-auto w-[80%] mb-5 mt-2">
-          <SectionText>{compatibilityText}</SectionText>
+          <SectionText thin>{compatibilityText}</SectionText>
         </div>
       </div>
       <p className="text-black text-[18px] font-semibold">
@@ -390,10 +395,17 @@ export default function Compatibility() {
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
+            onClick={() =>
+              window.open(
+                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${name}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${
+                  window.location.href
+                }&hashtags=native.,#nativeで繋がろう,MBTI`
+              )
+            }
           >
             <Image alt="" src={xIcon} width={30} style={{ zIndex: 1 }} />
           </div>
-          <div
+          {/* <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
           >
@@ -403,19 +415,19 @@ export default function Compatibility() {
               width={30}
               style={{ zIndex: 1 }}
             />
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
           >
             <Image alt="" src={lineIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
           >
             <Image alt="" src={facebookIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
+          </div> */}
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}

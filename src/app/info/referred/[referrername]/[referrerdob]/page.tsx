@@ -8,7 +8,7 @@ export default function Info() {
   return (
     <InfoComponent
       isReferred
-      referrerName={`${params?.referrername}`}
+      referrerName={`${decodeURIComponent(`${params?.referrername}`)}`}
       referrerDOB={{
         year: `${(params?.referrerdob as string)?.split("-")?.[0]}`,
         month: `${(params?.referrerdob as string)?.split("-")?.[1]}`,

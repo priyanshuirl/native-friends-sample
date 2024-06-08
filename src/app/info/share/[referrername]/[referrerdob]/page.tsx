@@ -7,7 +7,7 @@ export default function Info() {
   return (
     <InfoComponent
       shared
-      name={`${params?.referrername}`}
+      name={`${`${decodeURIComponent(`${params?.referrername}`)}`}`}
       dob={{
         year: `${(params?.referrerdob as string)?.split("-")?.[0]}`,
         month: `${(params?.referrerdob as string)?.split("-")?.[1]}`,

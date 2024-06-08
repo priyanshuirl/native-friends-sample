@@ -40,9 +40,11 @@ const HorizontalLine = () => <div className="h-[0.4px] w-full bg-black" />;
 const SectionText = ({
   children,
   align = "center",
+  thin = false,
 }: {
   children: React.ReactNode;
   align?: "center" | "left";
+  thin?: boolean;
 }) => {
   if ((children as string)?.includes("<br/>")) {
     return (children as string)?.split("<br/>")?.map((content, index) => {
@@ -64,8 +66,8 @@ const SectionText = ({
   } else {
     return (
       <p
-        className="text-black  font-semibold text-[12px]"
-        style={{ textAlign: align }}
+        className="text-black  text-[12px]"
+        style={{ textAlign: align, fontWeight: thin ? 400 : 600 }}
         dangerouslySetInnerHTML={{ __html: children as any }}
       />
     );
@@ -507,7 +509,9 @@ export default function InfoComponent({
         <RedSectionTitle>私と仲良くなる秘訣</RedSectionTitle>
         <HorizontalLine />
         <div className="m-3">
-          <SectionText align="left">{secretGetAlong}</SectionText>
+          <SectionText align="left" thin>
+            {secretGetAlong}
+          </SectionText>
         </div>
       </WhiteCard>
 
@@ -619,7 +623,9 @@ export default function InfoComponent({
             >
               {toreitsu1}
             </p>
-            <SectionText align="left">{toreitsu1Desc}</SectionText>
+            <SectionText align="left" thin>
+              {toreitsu1Desc}
+            </SectionText>
             <div className="h-5" />
 
             <GoldenSectionTitle>トリセツその２</GoldenSectionTitle>
@@ -630,7 +636,9 @@ export default function InfoComponent({
             >
               {toreitsu2}
             </p>
-            <SectionText align="left">{toreitsu2Desc}</SectionText>
+            <SectionText align="left" thin>
+              {toreitsu2Desc}
+            </SectionText>
             <div className="h-5" />
 
             <GoldenSectionTitle>トリセツその３</GoldenSectionTitle>
@@ -641,7 +649,9 @@ export default function InfoComponent({
             >
               {toreitsu3}
             </p>
-            <SectionText align="left">{toreitsu3Desc}</SectionText>
+            <SectionText align="left" thin>
+              {toreitsu3Desc}
+            </SectionText>
             <div className="h-5" />
           </WhiteCard>
         </div>
@@ -712,7 +722,7 @@ export default function InfoComponent({
           className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-[#EC736E] opacity-85 rounded-[20px]"
         >
           <p className="text-white text-[16px] font-semibold">
-            {referrerName}さんとの相性を見る
+            {decodeURIComponent(`${referrerName}`)}さんとの相性を見る
           </p>
         </button>
       ) : null}
