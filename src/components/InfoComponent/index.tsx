@@ -122,6 +122,7 @@ export default function InfoComponent({
   const [hideButton, setHideButton] = useState<boolean>(false);
   const [data, setData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [mtbiData, setMTBIData] = useState<any>();
 
   const handleReadMore = () => setIsReadMoreHidden((prev) => !prev);
 
@@ -140,7 +141,12 @@ export default function InfoComponent({
       `https://card.stg.be-native.life:8443/friends/friends_data/${year}/${month}/${date}`
     );
     const apiData = await apiResponse.json();
+    const mtbiAPIResponse = await fetch(
+      `https://card.stg.be-native.life:8443/friends/get_MBTI_score/${year}/${month}/${date}`
+    );
+    const mtbiAPIData = await mtbiAPIResponse.json();
     setData(apiData);
+    setMTBIData(mtbiAPIData);
     setIsLoading(false);
   };
 
@@ -189,13 +195,34 @@ export default function InfoComponent({
   const secretGetAlong = data?.param12;
 
   //Card Five
-  const card5Title = "運動家";
-  const card5SubTitle = "ENFP-A / ENFP-T";
-  const percentage1 = 75;
-  const percentage2 = 51;
-  const percentage3 = 61;
-  const percentage4 = 69;
-  const percentage5 = 30;
+  const card5Title = mtbiData?.mbti_type;
+  const card5SubTitle = mtbiData?.mbti_tag;
+  const percentage1 = Object.values(mtbiData?.param_1 ?? {})?.[0] as number;
+  const percentage2 = Object.values(mtbiData?.param_2 ?? {})?.[0] as number;
+  const percentage3 = Object.values(mtbiData?.param_3 ?? {})?.[0] as number;
+  const percentage4 = Object.values(mtbiData?.param_4 ?? {})?.[0] as number;
+  const percentage5 = Object.values(mtbiData?.param_5 ?? {})?.[0] as number;
+
+  const percentage1Label =
+    (Object.keys(mtbiData?.param_1 ?? {})?.[0] as string) === "E"
+      ? "外交型"
+      : "内向型";
+  const percentage2Label =
+    (Object.keys(mtbiData?.param_2 ?? {})?.[0] as string) === "S"
+      ? "直感型"
+      : "観察型";
+  const percentage3Label =
+    (Object.keys(mtbiData?.param_3 ?? {})?.[0] as string) === "T"
+      ? "思考型"
+      : "感情型";
+  const percentage4Label =
+    (Object.keys(mtbiData?.param_4 ?? {})?.[0] as string) === "J"
+      ? "計画型"
+      : "探索型";
+  const percentage5Label =
+    (Object.keys(mtbiData?.param_5 ?? {})?.[0] as string) === "A"
+      ? "自己主張型"
+      : "慎重型";
 
   //Card Seven
   const personality2 = data?.param6;
@@ -474,35 +501,35 @@ export default function InfoComponent({
         <ColouredProgressIndicator
           color="#6894AE"
           percentage={percentage1}
-          type="外交型"
+          type={percentage1Label}
           startIndicator="外交型"
           endIndicator="内向型"
         />
         <ColouredProgressIndicator
           color="#D5B260"
           percentage={percentage2}
-          type="直感型"
+          type={percentage2Label}
           startIndicator="直感型"
           endIndicator="観察型"
         />
         <ColouredProgressIndicator
           color="#69A07B"
           percentage={percentage3}
-          type="感情型"
+          type={percentage3Label}
           startIndicator="思考型"
           endIndicator="感情型"
         />
         <ColouredProgressIndicator
           color="#7D6494"
           percentage={percentage4}
-          type="探索型"
+          type={percentage4Label}
           startIndicator="計画型"
           endIndicator="探索型"
         />
         <ColouredProgressIndicator
           color="#D16E6B"
           percentage={percentage5}
-          type="自己主張型"
+          type={percentage5Label}
           startIndicator="自己主張型"
           endIndicator="慎重型"
         />
