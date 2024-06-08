@@ -390,7 +390,9 @@ export default function Compatibility() {
       {/* Card Six */}
       <WhiteCard>
         <div className="h-2" />
-        <SectionText>native.をSNSでシェア、相性診断</SectionText>
+        <p className="text-black text-center font-semibold text-[16px]">
+          native.をSNSでシェア、相性診断
+        </p>
         <div className="mt-2 flex w-full flex-row justify-center gap-3 items-center mb-2">
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
