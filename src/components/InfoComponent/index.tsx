@@ -47,11 +47,13 @@ const SectionText = ({
   if ((children as string)?.includes("<br/>")) {
     return (children as string)?.split("<br/>")?.map((content, index) => {
       return index % 2 === 0 ? (
-        <p
-          className="text-black font-extrabold text-[16px] my-1"
-          style={{ textAlign: align, fontWeight: 900 }}
-          dangerouslySetInnerHTML={{ __html: content as any }}
-        />
+        <b>
+          <p
+            className="text-black font-extrabold text-[16px] my-1"
+            style={{ textAlign: align, fontWeight: 900 }}
+            dangerouslySetInnerHTML={{ __html: content as any }}
+          />
+        </b>
       ) : (
         <p
           className="text-black  font-semibold text-[12px]"
