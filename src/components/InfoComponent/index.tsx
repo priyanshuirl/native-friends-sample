@@ -49,8 +49,8 @@ const SectionText = ({
       return index % 2 === 0 ? (
         <b>
           <p
-            className="text-black font-extrabold text-[16px] my-1"
-            style={{ textAlign: align, fontWeight: 900 }}
+            className="text-black font-bold text-[16px] my-1"
+            style={{ textAlign: align }}
             dangerouslySetInnerHTML={{ __html: content as any }}
           />
         </b>
@@ -614,19 +614,34 @@ export default function InfoComponent({
           <WhiteCard>
             <GoldenSectionTitle>トリセツその１</GoldenSectionTitle>
             <HorizontalLine />
-            <SectionText>{toreitsu1}</SectionText>
+            <p
+              className="text-black font-bold text-[16px] my-1"
+              style={{ textAlign: "center" }}
+            >
+              {toreitsu1}
+            </p>
             <SectionText align="left">{toreitsu1Desc}</SectionText>
             <div className="h-5" />
 
             <GoldenSectionTitle>トリセツその２</GoldenSectionTitle>
             <HorizontalLine />
-            <SectionText>{toreitsu2}</SectionText>
+            <p
+              className="text-black font-bold text-[16px] my-1"
+              style={{ textAlign: "center" }}
+            >
+              {toreitsu2}
+            </p>
             <SectionText align="left">{toreitsu2Desc}</SectionText>
             <div className="h-5" />
 
             <GoldenSectionTitle>トリセツその３</GoldenSectionTitle>
             <HorizontalLine />
-            <SectionText>{toreitsu3}</SectionText>
+            <p
+              className="text-black font-bold text-[16px] my-1"
+              style={{ textAlign: "center" }}
+            >
+              {toreitsu3}
+            </p>
             <SectionText align="left">{toreitsu3Desc}</SectionText>
             <div className="h-5" />
           </WhiteCard>
