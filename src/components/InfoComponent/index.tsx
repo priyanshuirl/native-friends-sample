@@ -100,6 +100,8 @@ const ColouredProgressIndicator = ({
             left:
               type === "自己主張型"
                 ? `calc(${percentageToBeUsed}% - 120px)`
+                : percentage > 95
+                ? `calc(${percentageToBeUsed}% - 100px)`
                 : `calc(${percentageToBeUsed}% - 80px)`,
           }}
         >
@@ -521,8 +523,11 @@ export default function InfoComponent({
           MBTIの結果と比べてみよう
           <br /> あなたの生まれつきの素養をMBTIでいうと
         </p>
-        <p className="font-semibold text-[24px] text-[#56A278] text-center">
-          {card5Title}
+        <p
+          className="font-extrabold text-[24px] text-[#56A278] text-center"
+          style={{ fontWeight: 900 }}
+        >
+          <b>{card5Title}</b>
         </p>
         <SectionText>{card5SubTitle}</SectionText>
         <HorizontalLine />
