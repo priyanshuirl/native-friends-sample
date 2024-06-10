@@ -33,7 +33,7 @@ function rgb2hex(r: number, g: number, b: number) {
   );
 }
 
-export function mixHexes(hex1: string, hex2: string, ratio: number = 0.5) {
+function mixHexes(hex1: string, hex2: string, ratio: number = 0.5) {
   if (ratio > 1 || ratio < 0) throw new Error("Invalid ratio");
   //@ts-ignore
   const [r1, g1, b1] = hex2dec(hex1);
