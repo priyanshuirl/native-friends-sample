@@ -684,7 +684,11 @@ export default function InfoComponent({
             style={{ border: "0.6px solid #000" }}
             onClick={() =>
               window.open(
-                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${name}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${shareLink}&hashtags=native.,#nativeで繋がろう,MBTI`
+                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${encodeURIComponent(
+                  name
+                )}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${encodeURIComponent(
+                  shareLink
+                )}&hashtags=native.,#nativeで繋がろう,MBTI`
               )
             }
           >
