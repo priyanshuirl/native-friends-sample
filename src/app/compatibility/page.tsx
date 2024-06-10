@@ -16,33 +16,33 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-function blendColors(
-  colorA: string = "",
-  colorB: string = "",
-  amount: number = 0.5
-) {
-  const val1 = (colorA as any)
-    ?.match(/\w\w/g)
-    ?.map((c: any) => parseInt(c, 16));
-  const rA = val1?.[0];
-  const gA = val1?.[0];
-  const bA = val1?.[0];
-  const val2 = (colorB as any)
-    ?.match(/\w\w/g)
-    ?.map((c: any) => parseInt(c, 16));
-  const rB = val2?.[0];
-  const gB = val2?.[0];
-  const bB = val2?.[0];
-  const r = Math.round(rA + (rB - rA) * amount)
-    .toString(16)
-    .padStart(2, "0");
-  const g = Math.round(gA + (gB - gA) * amount)
-    .toString(16)
-    .padStart(2, "0");
-  const b = Math.round(bA + (bB - bA) * amount)
-    .toString(16)
-    .padStart(2, "0");
-  return "#" + r + g + b;
+function hex2dec(hex: string): Array<number> {
+  const matched = hex?.replace("#", "")?.match(/.{2}/g);
+  return matched?.map((n) => parseInt(n, 16)) ?? [];
+}
+
+function rgb2hex(r: number, g: number, b: number) {
+  r = Math.round(r);
+  g = Math.round(g);
+  b = Math.round(b);
+  r = Math.min(r, 255);
+  g = Math.min(g, 255);
+  b = Math.min(b, 255);
+  return (
+    "#" + [r, g, b].map((c) => c?.toString(16)?.padStart(2, "0"))?.join("")
+  );
+}
+
+export function mixHexes(hex1: string, hex2: string, ratio: number = 0.5) {
+  if (ratio > 1 || ratio < 0) throw new Error("Invalid ratio");
+  //@ts-ignore
+  const [r1, g1, b1] = hex2dec(hex1);
+  //@ts-ignore
+  const [r2, g2, b2] = hex2dec(hex2);
+  const r = Math.round(r1 * ratio + r2 * (1 - ratio));
+  const g = Math.round(g1 * ratio + g2 * (1 - ratio));
+  const b = Math.round(b1 * ratio + b2 * (1 - ratio));
+  return rgb2hex(r, g, b);
 }
 
 function addAlpha(color: string, opacity: number) {
@@ -221,7 +221,7 @@ export default function Compatibility() {
               value={progressValue}
               strokeWidth={14}
               styles={buildStyles({
-                // pathColor: blendColors(selfColor, referrerColor, 0.5),
+                pathColor: mixHexes(selfColor, referrerColor, 0.5),
                 trailColor: "#E5E5E5",
                 pathTransitionDuration: 0.5,
               })}
