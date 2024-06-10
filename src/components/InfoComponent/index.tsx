@@ -90,7 +90,10 @@ const ColouredProgressIndicator = ({
   const percentageToBeUsed = percentage > 100 ? 100 : percentage;
   return (
     <div className="w-full flex flex-row items-center h-[56px] my-1">
-      <p className="text-[10px] text-[#AAA] font-semibold min-w-[70px] mt-10">
+      <p
+        className="text-[10px] font-semibold min-w-[70px] mt-10"
+        style={{ color: startIndicator === type ? "#000" : "#AAA" }}
+      >
         {startIndicator}
       </p>
       <div className="w-full relative">
@@ -123,7 +126,10 @@ const ColouredProgressIndicator = ({
           />
         </div>
       </div>
-      <p className="text-[10px] text-[#AAA] font-semibold min-w-[60px] mt-10 text-right">
+      <p
+        className="text-[10px] font-semibold min-w-[60px] mt-10 text-right"
+        style={{ color: endIndicator === type ? "#000" : "#AAA" }}
+      >
         {endIndicator}
       </p>
     </div>
