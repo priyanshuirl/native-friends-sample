@@ -739,12 +739,11 @@ export default function InfoComponent({
 
       {isReferred ? (
         <button
+          className="fixed bottom-0 left-[50%] font-semibold text-[14px] bg-[#EC736E] text-white w-max h-[50px] flex items-center justify-center rounded-[16px] px-4"
+          style={{ transform: "translate(-50%,-50%)", zIndex: 9 }}
           onClick={handleCompatible}
-          className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-[#EC736E] opacity-85 rounded-[20px]"
         >
-          <p className="text-white text-[16px] font-semibold">
-            {decodeURIComponent(`${referrerName}`)}さんとの相性を見る
-          </p>
+          {decodeURIComponent(`${referrerName}`)} さんとの相性診断 ⁨⁩⁨⁩ ▶︎
         </button>
       ) : null}
 
