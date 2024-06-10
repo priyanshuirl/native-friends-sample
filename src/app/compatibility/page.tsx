@@ -399,9 +399,11 @@ export default function Compatibility() {
             style={{ border: "0.6px solid #000" }}
             onClick={() =>
               window.open(
-                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${name}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${
+                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${encodeURIComponent(
+                  `${selfUsername}`
+                )}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${encodeURIComponent(
                   window.location.href
-                }&hashtags=native.,#nativeで繋がろう,MBTI`
+                )}&hashtags=native.,#nativeで繋がろう,MBTI`
               )
             }
           >
