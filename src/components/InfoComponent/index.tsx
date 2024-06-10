@@ -519,10 +519,11 @@ export default function InfoComponent({
 
       {/* Card Five */}
       <WhiteCard>
-        <p className="text-[#B696C2] font-semibold text-[14px] text-center">
-          MBTIの結果と比べてみよう
-          <br /> あなたの生まれつきの素養をMBTIでいうと
+        <p className="text-[#EC736E] font-semibold text-[16px] text-center">
+          今のMBTIの結果と比較
         </p>
+        <HorizontalLine />
+        <SectionText>生まれつきの性格タイプ</SectionText>
         <p
           className="font-extrabold text-[24px] text-[#56A278] text-center"
           style={{ fontWeight: 900 }}
@@ -530,10 +531,11 @@ export default function InfoComponent({
           <b>{card5Title}</b>
         </p>
         <SectionText>{card5SubTitle}</SectionText>
-        <HorizontalLine />
-        <p className="text-[#B696C2] font-semibold text-[12px] text-center mt-5">
-          MBTI式嗜好性パラメーター
+        <div className="h-3" />
+        <p className="text-[#EC736E] font-semibold text-[16px] text-center">
+          MBTI式native.スコア性格特性
         </p>
+        <HorizontalLine />
         <div className="h-5" />
         <ColouredProgressIndicator
           color="#6894AE"
