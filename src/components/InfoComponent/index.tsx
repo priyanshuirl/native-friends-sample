@@ -11,6 +11,8 @@ import {
 import { logo } from "@/assets/brand";
 import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -283,7 +285,6 @@ export default function InfoComponent({
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(shareLink);
-    alert("Link copied to clipboard!");
   };
 
   const handleIssueInstantly = () => {
@@ -725,7 +726,9 @@ export default function InfoComponent({
           >
             <Image alt="" src={facebookIcon} width={30} style={{ zIndex: 1 }} />
           </div> */}
+          <Tooltip id="copied-to-clipboard-tooltip">コピーしました！</Tooltip>
           <div
+            data-tooltip-id="copied-to-clipboard-tooltip"
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
             onClick={handleCopyLink}

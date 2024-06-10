@@ -16,7 +16,8 @@
     "react-circular-progressbar": "^2.1.0",
     "react-date-picker": "^11.0.0",
     "react-dom": "^18",
-    "react-qr-code": "^2.0.14"
+    "react-qr-code": "^2.0.14",
+    "react-tooltip": "^5.26.4"
   },
   "devDependencies": {
     "@types/node": "^20",
