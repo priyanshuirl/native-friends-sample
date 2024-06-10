@@ -30,7 +30,7 @@ const RedSectionTitle = ({ children }: { children: React.ReactNode }) => (
 );
 
 const GoldenSectionTitle = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[#E6B422] text-center font-semibold text-[14px]">
+  <p className="text-[#E6B422] text-center font-semibold text-[16px]">
     {children}
   </p>
 );
