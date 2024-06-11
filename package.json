@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "invalidate:prd": "aws cloudfront create-invalidation --distribution-id E2YMIAOKWGQTGW --paths \"/*\" --no-cli-pager",
-    "deploy:prd": "aws s3 sync out/ s3://prd-native-friend-front/"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "14.2.3",
