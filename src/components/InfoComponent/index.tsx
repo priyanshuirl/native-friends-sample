@@ -17,7 +17,7 @@ import "react-tooltip/dist/react-tooltip.css";
 const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
-      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-3 px-4"
+      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-4 px-4 pb-5"
       style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
     >
       {children}
@@ -525,7 +525,7 @@ export default function InfoComponent({
         <div className="h-5" />
         <RedSectionTitle>私と仲良くなる秘訣</RedSectionTitle>
         <HorizontalLine />
-        <div className="m-3">
+        <div className="mx-3 my-0">
           <SectionText align="left" thin>
             {secretGetAlong}
           </SectionText>
