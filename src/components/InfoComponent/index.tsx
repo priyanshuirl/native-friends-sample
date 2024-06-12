@@ -741,6 +741,7 @@ export default function InfoComponent({
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
             onClick={handleCopyLink}
+            onMouseEnter={handleCopyLink}
           >
             <Image alt="" src={shareIcon} width={30} style={{ zIndex: 1 }} />
           </div>
