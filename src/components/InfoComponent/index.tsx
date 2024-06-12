@@ -17,7 +17,7 @@ import "react-tooltip/dist/react-tooltip.css";
 const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
-      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-4 px-4 pb-5"
+      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-4 px-4 pb-6"
       style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
     >
       {children}
