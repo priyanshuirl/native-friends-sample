@@ -698,7 +698,7 @@ export default function InfoComponent({
             removeQrCodeBehindLogo
             qrStyle="fluid"
             logoPadding={10}
-            logoPaddingStyle="circle"
+            logoPaddingStyle="square"
           />
         </div>
         <p className="text-black text-center font-semibold text-[16px]">
