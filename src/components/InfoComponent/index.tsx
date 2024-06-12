@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   facebookIcon,
@@ -159,15 +159,23 @@ export default function InfoComponent({
   const [data, setData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [mtbiData, setMTBIData] = useState<any>();
+  const scrollAnchorRef = useRef<HTMLDivElement>(null);
 
-  const handleReadMore = () => setIsReadMoreHidden((prev) => !prev);
+  const handleReadMore = () => {
+    scrollAnchorRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "start",
+    });
+    setIsReadMoreHidden((prev) => !prev);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!isReadMoreHidden) {
         setHideButton(true);
       }
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [isReadMoreHidden]);
 
@@ -600,6 +608,7 @@ export default function InfoComponent({
           endIndicator="慎重型"
         />
       </WhiteCard>
+      <div ref={scrollAnchorRef} />
       <div className="overflow-hidden">
         <div
           className="flex flex-col items-center gap-5 pb-5"
