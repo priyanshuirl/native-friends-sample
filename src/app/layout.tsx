@@ -6,7 +6,7 @@ import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Native for Friends",
+  title: "native for Friends",
   description: "Get yours today!",
 };
 
