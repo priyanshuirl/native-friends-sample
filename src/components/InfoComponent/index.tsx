@@ -8,9 +8,9 @@ import {
   shareIcon,
   xIcon,
 } from "@/assets/social";
-import { logo } from "@/assets/brand";
+import { logo, logoJPG } from "@/assets/brand";
 import { useRouter } from "next/navigation";
-import QRCode from "react-qr-code";
+import { QRCode } from "react-qrcode-logo";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
@@ -690,7 +690,15 @@ export default function InfoComponent({
             size={256}
             style={{ height: "auto", maxWidth: "100%", width: "100%" }}
             value={shareLink}
-            viewBox={`0 0 256 256`}
+            fgColor={mainColor}
+            logoImage={logoJPG.src}
+            logoHeight={40}
+            logoWidth={90}
+            logoOpacity={1}
+            removeQrCodeBehindLogo
+            qrStyle="fluid"
+            logoPadding={10}
+            logoPaddingStyle="circle"
           />
         </div>
         <p className="text-black text-center font-semibold text-[16px]">
