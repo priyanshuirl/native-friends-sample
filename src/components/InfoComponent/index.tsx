@@ -116,7 +116,7 @@ const ColouredProgressIndicator = ({
           </p>
         </div>
         <div
-          className="w-[28px] h-[28px] rounded-full absolute top-[-7.7px] z-10"
+          className="w-[28px] h-[28px] rounded-full absolute top-[-7.7px] z-[1]"
           style={{
             [isRightAligned
               ? "right"
