@@ -90,6 +90,7 @@ const ColouredProgressIndicator = ({
   endIndicator: string;
 }) => {
   const percentageToBeUsed = percentage > 100 ? 100 : percentage;
+  const isRightAligned = type === startIndicator;
   return (
     <div className="w-full flex flex-row items-center h-[56px] my-1">
       <p
@@ -102,7 +103,7 @@ const ColouredProgressIndicator = ({
         <div
           className=" absolute top-[-36px]"
           style={{
-            left:
+            [isRightAligned ? "right" : "left"]:
               type === "自己主張型"
                 ? `calc(${percentageToBeUsed}% - 120px)`
                 : percentage > 95
@@ -115,16 +116,22 @@ const ColouredProgressIndicator = ({
           </p>
         </div>
         <div
-          className="w-[28px] h-[28px] rounded-full absolute top-[-7.7px]"
+          className="w-[28px] h-[28px] rounded-full absolute top-[-7.7px] z-10"
           style={{
-            left: `calc(${percentageToBeUsed}% - 20px)`,
+            [isRightAligned
+              ? "right"
+              : "left"]: `calc(${percentageToBeUsed}% - 20px)`,
             background: color,
           }}
         />
-        <div className="flex flex-row items-center h-[14px] bg-[#E5E5E5] rounded-full w-full overflow-hidden">
+        <div className="flex flex-row items-center h-[14px] bg-[#E5E5E5] rounded-full w-full overflow-hidden relative">
           <div
-            className="h-full "
-            style={{ width: `${percentageToBeUsed}%`, background: color }}
+            className="h-full absolute"
+            style={{
+              width: `${100}%`,
+              background: color,
+              [isRightAligned ? "right" : "left"]: 0,
+            }}
           />
         </div>
       </div>
