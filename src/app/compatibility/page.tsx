@@ -15,35 +15,6 @@ import { Tooltip } from "react-tooltip";
 //@ts-ignore
 import { CircleProgress } from "react-gradient-progress";
 
-function hex2dec(hex: string): Array<number> {
-  const matched = hex?.replace("#", "")?.match(/.{2}/g);
-  return matched?.map((n) => parseInt(n, 16)) ?? [];
-}
-
-function rgb2hex(r: number, g: number, b: number) {
-  r = Math.round(r);
-  g = Math.round(g);
-  b = Math.round(b);
-  r = Math.min(r, 255);
-  g = Math.min(g, 255);
-  b = Math.min(b, 255);
-  return (
-    "#" + [r, g, b].map((c) => c?.toString(16)?.padStart(2, "0"))?.join("")
-  );
-}
-
-function mixHexes(hex1: string, hex2: string, ratio: number = 0.5) {
-  if (ratio > 1 || ratio < 0) throw new Error("Invalid ratio");
-  //@ts-ignore
-  const [r1, g1, b1] = hex2dec(hex1);
-  //@ts-ignore
-  const [r2, g2, b2] = hex2dec(hex2);
-  const r = Math.round(r1 * ratio + r2 * (1 - ratio));
-  const g = Math.round(g1 * ratio + g2 * (1 - ratio));
-  const b = Math.round(b1 * ratio + b2 * (1 - ratio));
-  return rgb2hex(r, g, b);
-}
-
 function addAlpha(color: string, opacity: number) {
   var _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
   return color + _opacity.toString(16).toUpperCase();
@@ -109,16 +80,7 @@ export default function Compatibility() {
   const [selfData, setSelfData] = useState<any>();
   const [referrerData, setReferrerData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [progressValue, setProgressValue] = useState<number>(0);
   const [compatibilityData, setCompatibilityData] = useState<any>();
-
-  useEffect(() => {
-    setProgressValue(0);
-    const timer = setTimeout(() => {
-      setProgressValue(compatibilityData?.score);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [compatibilityData]);
 
   const selfUsername = searchParams.get("self-name");
   const referrerUsername = decodeURIComponent(
@@ -217,7 +179,7 @@ export default function Compatibility() {
             style={{ transform: "translate(-68%,-40%)" }}
           >
             <CircleProgress
-              percentage={progressValue}
+              percentage={compatibilityData?.score}
               strokeWidth={14}
               width={150}
               primaryColor={["#B69EC6", "#A6C1EA"]}
@@ -231,7 +193,7 @@ export default function Compatibility() {
                 ふたりのフィット感
               </p>
               <p className="text-center text-[#EC736E] text-[22px] font-extrabold">
-                {progressValue}%
+                {compatibilityData?.score}%
               </p>
             </div>
           </div>
