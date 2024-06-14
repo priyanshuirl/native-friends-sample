@@ -326,7 +326,7 @@ export default function InfoComponent({
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
       {shared ? (
         <button
-          className="fixed bottom-0 font-bold left-[50%] text-[18px] bg-[#EC736E] text-white w-[200px] h-[50px] flex items-center justify-center rounded-[16px]"
+          className="fixed bottom-0 font-bold left-[50%] text-[18px] bg-[#EC736E] text-white w-[200px] h-[50px] flex items-center justify-center rounded-[16px] z-[9]"
           style={{ transform: "translate(-50%,-50%)", zIndex: 9 }}
           onClick={handleIssueInstantly}
         >
