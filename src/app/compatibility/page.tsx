@@ -218,7 +218,7 @@ export default function Compatibility() {
             className="absolute top-[50%] left-[50%] w-[110px]"
             style={{ transform: "translate(-50%,-40%)" }}
           >
-            {/* <CircularProgressbarWithChildren
+            <CircularProgressbarWithChildren
               value={progressValue}
               strokeWidth={14}
               styles={buildStyles({
@@ -238,7 +238,7 @@ export default function Compatibility() {
                   {progressValue}%
                 </p>
               </div>
-            </CircularProgressbarWithChildren> */}
+            </CircularProgressbarWithChildren>
           </div>
           <div
             className="w-full flex flex-col gap-3 items-center px-5 pb-5"
