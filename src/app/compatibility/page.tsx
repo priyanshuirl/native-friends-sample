@@ -367,6 +367,7 @@ export default function Compatibility() {
           >
             <Image alt="" src={xIcon} width={30} style={{ zIndex: 1 }} />
           </div>
+
           {/* <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
