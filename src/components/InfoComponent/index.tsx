@@ -778,7 +778,7 @@ export default function InfoComponent({
       {hideButton ? null : (
         <button
           onClick={handleReadMore}
-          className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px]"
+          className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-black opacity-85 rounded-[20px] z-10"
         >
           <p className="text-white text-[16px] font-semibold">さらに深く見る</p>
         </button>
