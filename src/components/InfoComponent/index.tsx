@@ -116,15 +116,17 @@ const ColouredProgressIndicator = ({
           </p>
         </div>
         <div
-          className="w-[28px] h-[28px] rounded-full absolute top-[-7.7px] z-[1]"
+          className="w-[16px] h-[16px] rounded-full absolute top-[-2.5px] z-[1]"
           style={{
             [isRightAligned
               ? "right"
               : "left"]: `calc(${percentageToBeUsed}% - 20px)`,
+            border: "2px solid #fff",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             background: color,
           }}
         />
-        <div className="flex flex-row items-center h-[14px] bg-[#E5E5E5] rounded-full w-full overflow-hidden relative">
+        <div className="flex flex-row items-center h-[12px] bg-[#E5E5E5] rounded-full w-full overflow-hidden relative">
           <div
             className="h-full absolute"
             style={{
