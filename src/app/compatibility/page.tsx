@@ -10,12 +10,10 @@ import {
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  buildStyles,
-  CircularProgressbarWithChildren,
-} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Tooltip } from "react-tooltip";
+//@ts-ignore
+import { CircleProgress } from "react-gradient-progress";
 
 function hex2dec(hex: string): Array<number> {
   const matched = hex?.replace("#", "")?.match(/.{2}/g);
@@ -216,29 +214,26 @@ export default function Compatibility() {
         <div className="w-full grid grid-cols-2 relative">
           <div
             className="absolute top-[50%] left-[50%] w-[110px]"
-            style={{ transform: "translate(-50%,-40%)" }}
+            style={{ transform: "translate(-68%,-40%)" }}
           >
-            <CircularProgressbarWithChildren
-              value={progressValue}
+            <CircleProgress
+              percentage={progressValue}
               strokeWidth={14}
-              styles={buildStyles({
-                pathColor: mixHexes(selfColor, referrerColor, 0.5),
-                trailColor: "#E5E5E5",
-                pathTransitionDuration: 0.5,
-              })}
+              width={150}
+              primaryColor={["#B69EC6", "#A6C1EA"]}
+              secondaryColor="#E5E5E5"
+            />
+            <div
+              style={{ fontSize: 12 }}
+              className="bg-white w-[82px] h-[82px] rounded-full flex flex-col items-center justify-center absolute top-[35px] left-[34px]"
             >
-              <div
-                style={{ fontSize: 12 }}
-                className="bg-white h-[75%] w-[75%] rounded-full flex flex-col items-center justify-center"
-              >
-                <p className="text-black font-semibold text-center text-[8px] w-[40px]">
-                  ふたりのフィット感
-                </p>
-                <p className="text-center text-[#EC736E] text-[22px] font-extrabold">
-                  {progressValue}%
-                </p>
-              </div>
-            </CircularProgressbarWithChildren>
+              <p className="text-black font-semibold text-center text-[8px] w-[40px]">
+                ふたりのフィット感
+              </p>
+              <p className="text-center text-[#EC736E] text-[22px] font-extrabold">
+                {progressValue}%
+              </p>
+            </div>
           </div>
           <div
             className="w-full flex flex-col gap-3 items-center px-5 pb-5"
