@@ -234,7 +234,7 @@ export default function InfoComponent({
   const catchTitle = data?.param3;
 
   // Card One
-  const nativeScore = data?.native_score;
+  const nativeScore = Math.round(Number(data?.native_score) * 2.77);
 
   // Card Two
   const personalHash1 = `#${data?.param4?.split("#")?.[1]}`;
@@ -261,9 +261,14 @@ export default function InfoComponent({
   const fitChara2Title = data?.best_partner_text_2;
 
   const getAlongScore1 =
-    Number(nativeScore) - 5 < 3 ? 3 : Number(nativeScore) - 5;
+    Math.round((Number(data?.native_score) - 5) * 2.77) < 8
+      ? 8
+      : Math.round((Number(data?.native_score) - 5) * 2.77);
   const getAlongScore2 =
-    Number(nativeScore) + 5 > 36 ? 36 : Number(nativeScore) + 5;
+    Math.round((Number(data?.native_score) + 5) * 2.77) > 100
+      ? 100
+      : Math.round((Number(data?.native_score) + 5) * 2.77);
+
   const secretGetAlong = data?.param12;
 
   //Card Five
@@ -402,6 +407,45 @@ export default function InfoComponent({
             {nativeScore}
           </p>
           <div className="w-full flex flex-col gap-2 mt-3">
+            <div className="w-full grid grid-cols-3 gap-1">
+              <div className="w-full flex flex-col gap-1 items-center">
+                <p className="font-semibold text-[#aaa] text-[12px]">
+                  研究者気質
+                </p>
+                <div className="flex flex-row items-center justify-between w-full">
+                  <p className="font-semibold text-[#aaa] text-[12px]">1</p>
+                  <p
+                    className="font-semibold text-[#aaa] text-[12px] pr-1"
+                    style={{ borderRight: "0.4px solid #aaa" }}
+                  >
+                    33
+                  </p>
+                </div>
+              </div>
+              <div className="w-full flex flex-col gap-1 items-center">
+                <p className="font-semibold text-[#aaa] text-[12px]">
+                  管理職気質
+                </p>
+                <div className="flex flex-row items-center justify-between w-full">
+                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
+                  <p
+                    className="font-semibold text-[#aaa] text-[12px] pl-1"
+                    style={{ borderLeft: "0.4px solid #aaa" }}
+                  >
+                    66
+                  </p>
+                </div>
+              </div>
+              <div className="w-full flex flex-col gap-1 items-center">
+                <p className="font-semibold text-[#aaa] text-[12px]">
+                  起業家気質
+                </p>
+                <div className="flex flex-row items-center justify-between w-full">
+                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
+                  <p className="font-semibold text-[#aaa] text-[12px]">100</p>
+                </div>
+              </div>
+            </div>
             <div
               className="h-[12px] rounded-full overflow-hidden flex flex-row items-center relative"
               style={{
@@ -410,53 +454,52 @@ export default function InfoComponent({
               }}
             >
               <div
+                className="w-[15px] h-[15px] bg-[#AAA] rounded-full absolute "
+                style={{
+                  border: "3px solid #fff",
+                  left: `${getAlongScore1}%`,
+                }}
+              />
+              <div
                 className="w-[15px] h-[15px] bg-[#EC736E] rounded-full absolute "
                 style={{
                   border: "3px solid #fff",
-                  left: `${(nativeScore / 36) * 100}%`,
+                  left: `${nativeScore}%`,
+                }}
+              />
+              <div
+                className="w-[15px] h-[15px] bg-[#AAA] rounded-full absolute "
+                style={{
+                  border: "3px solid #fff",
+                  left: `${getAlongScore2}%`,
                 }}
               />
             </div>
-            <div className="w-full grid grid-cols-3 gap-1">
-              <div className="w-full flex flex-col gap-1 items-center">
-                <div className="flex flex-row items-center justify-between w-full">
-                  <p className="font-semibold text-[#aaa] text-[12px]">
-                    3 (最小)
-                  </p>
-                  <p
-                    className="font-semibold text-[#aaa] text-[12px] pr-1"
-                    style={{ borderRight: "0.4px solid #aaa" }}
-                  >
-                    12
-                  </p>
-                </div>
-                <p className="font-semibold text-[#aaa] text-[12px]">
-                  研究者気質
-                </p>
-              </div>
-              <div className="w-full flex flex-col gap-1 items-center">
-                <div className="flex flex-row items-center justify-between w-full">
-                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
-                  <p
-                    className="font-semibold text-[#aaa] text-[12px] pr-1"
-                    style={{ borderRight: "0.4px solid #aaa" }}
-                  >
-                    23
-                  </p>
-                </div>
-                <p className="font-semibold text-[#aaa] text-[12px]">
-                  管理職気質
-                </p>
-              </div>
-              <div className="w-full flex flex-col gap-1 items-center">
-                <div className="flex flex-row items-center justify-between w-full">
-                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
-                  <p className="font-semibold text-[#aaa] text-[12px]">
-                    (最大) 36
-                  </p>
-                </div>
-                <p className="font-semibold text-[#aaa] text-[12px]">
-                  起業家気質
+            <div className="w-full relative h-10 pb-5">
+              <div
+                className="h-3 w-[1px] bg-[#AAA] absolute ml-[7px]"
+                style={{ left: `${getAlongScore1}%` }}
+              />
+              <div
+                className="h-3 w-[1px] bg-[#AAA] absolute ml-[7px]"
+                style={{ left: `${getAlongScore2}%` }}
+              />
+              <div
+                className="h-[1px] bg-[#AAA] top-[11px] absolute ml-[7.5px]"
+                style={{
+                  left: `${getAlongScore1}%`,
+                  width: `${getAlongScore2 - getAlongScore1}%`,
+                }}
+              />
+              <div
+                className="top-[22px] absolute"
+                style={{
+                  left: `${getAlongScore1 - 25}%`,
+                }}
+              >
+                <p className="font-semibold text-black text-[12px] whitespace-nowrap">
+                  あなたと相性が良い人のスコアは{getAlongScore1}~
+                  {getAlongScore2}
                 </p>
               </div>
             </div>
@@ -550,11 +593,6 @@ export default function InfoComponent({
             <SectionText align="left">{fitChara2Title}</SectionText>
           </div>
         </div>
-        <div className="h-5" />
-        <SectionText>フィットするnative. スコアの人</SectionText>
-        <p className="text-[36px] text-black font-bold text-center">
-          {getAlongScore1}~{getAlongScore2}
-        </p>
         <div className="h-5" />
         <RedSectionTitle>私と仲良くなる秘訣</RedSectionTitle>
         <HorizontalLine />
