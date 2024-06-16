@@ -6,6 +6,7 @@ import GirlWithNotepad from "./girlWithNotepad.svg";
 import GirlWithParachute from "./girlWithParachute.svg";
 import GirlWithSparkles from "./girlWithSparkles.svg";
 import ManPondering from "./manPondering.svg";
+import PeopleConversation from "./peopleConversation.png";
 
 export {
   CoupleOnScooter,
@@ -16,4 +17,5 @@ export {
   GirlWithParachute,
   GirlWithSparkles,
   ManPondering,
+  PeopleConversation,
 };
