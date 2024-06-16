@@ -4,13 +4,13 @@ import { logoJPG } from "@/assets/brand";
 import { QRCode } from "react-qrcode-logo";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { WhiteCard } from "../InfoComponent";
 import Image from "next/image";
 import {
   FacebookShareButton,
   LineShareButton,
   TwitterShareButton,
 } from "react-share";
+import { WhiteCard } from "../PageCommons";
 
 interface PropTypes {
   shareLink: string;
