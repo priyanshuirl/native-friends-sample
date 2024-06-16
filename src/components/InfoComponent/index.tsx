@@ -4,12 +4,30 @@ import Image from "next/image";
 import { logo } from "@/assets/brand";
 import { useRouter } from "next/navigation";
 import ShareSection from "../ShareSection";
+import {
+  GirlAnalyst,
+  GirlInBalloon,
+  GirlWithGiantFolder,
+  GirlWithNotepad,
+  GirlWithParachute,
+  GirlWithSparkles,
+  ManPondering,
+} from "@/assets/illustrations";
 
-export const WhiteCard = ({ children }: { children: React.ReactNode }) => {
+export const WhiteCard = ({
+  children,
+  noPadding = false,
+}: {
+  children: React.ReactNode;
+  noPadding?: boolean;
+}) => {
   return (
     <div
-      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-4 px-4 pb-6"
-      style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
+      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] overflow-hidden  pb-6"
+      style={{
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        padding: noPadding ? "0px" : "16px",
+      }}
     >
       {children}
     </div>
@@ -450,6 +468,9 @@ export default function InfoComponent({
       <WhiteCard>
         <RedSectionTitle>パーソナリティ</RedSectionTitle>
         <HorizontalLine />
+        <div className="mx-auto">
+          <Image alt="" src={GirlWithNotepad} width={150} height={120} />
+        </div>
         <div className="flex flex-row items-center justify-center gap-4">
           <SectionText>{personalHash1}</SectionText>
           <SectionText>{personalHash2}</SectionText>
@@ -470,10 +491,16 @@ export default function InfoComponent({
       <WhiteCard>
         <RedSectionTitle>テンションUPする瞬間</RedSectionTitle>
         <HorizontalLine />
+        <div className="mx-auto">
+          <Image alt="" src={GirlInBalloon} width={150} height={120} />
+        </div>
         <SectionText>{motivationMoment1}</SectionText>
         <div className="h-5" />
         <RedSectionTitle>テンションDOWNする瞬間</RedSectionTitle>
         <HorizontalLine />
+        <div className="mx-auto">
+          <Image alt="" src={GirlWithParachute} width={150} height={120} />
+        </div>
         <SectionText>{demotivationMoment1}</SectionText>
       </WhiteCard>
 
@@ -619,7 +646,7 @@ export default function InfoComponent({
         <div
           className="flex flex-col items-center gap-5 pb-5"
           style={{
-            marginBottom: isReadMoreHidden ? "-2000px" : "0px",
+            marginBottom: isReadMoreHidden ? "-2200px" : "0px",
             transition: "1.5s ease",
           }}
         >
@@ -627,6 +654,9 @@ export default function InfoComponent({
           <WhiteCard>
             <RedSectionTitle>詳細なパーソナリティ</RedSectionTitle>
             <HorizontalLine />
+            <div className="mx-auto">
+              <Image alt="" src={GirlAnalyst} width={150} height={120} />
+            </div>
             <SectionText>{personality2}</SectionText>
             <div className="h-5" />
           </WhiteCard>
@@ -635,15 +665,29 @@ export default function InfoComponent({
           <WhiteCard>
             <RedSectionTitle>もっとテンションUPする瞬間</RedSectionTitle>
             <HorizontalLine />
+            <div className="mx-auto">
+              <Image alt="" src={GirlWithSparkles} width={150} height={120} />
+            </div>
             <SectionText>{motivationMoment2}</SectionText>
             <div className="h-5" />
             <RedSectionTitle>もっとテンションDOWNする瞬間</RedSectionTitle>
             <HorizontalLine />
+            <div className="mx-auto my-5">
+              <Image alt="" src={ManPondering} width={150} height={120} />
+            </div>
             <SectionText>{demotivationMoment2}</SectionText>
           </WhiteCard>
 
           {/* Card Nine */}
           <WhiteCard>
+            <div className="mx-auto">
+              <Image
+                alt=""
+                src={GirlWithGiantFolder}
+                width={150}
+                height={120}
+              />
+            </div>
             <GoldenSectionTitle>トリセツその１</GoldenSectionTitle>
             <HorizontalLine />
             <p

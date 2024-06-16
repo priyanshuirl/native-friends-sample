@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { CircleProgress } from "react-gradient-progress";
 import { SectionText, WhiteCard } from "@/components/InfoComponent";
 import ShareSection from "@/components/ShareSection";
+import { CoupleOnScooter, ManPondering } from "@/assets/illustrations";
 
 function addAlpha(color: string, opacity: number) {
   var _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
@@ -223,7 +224,7 @@ export default function Compatibility() {
         仲良しになるための3つのポイント
       </p>
       {/* Card One */}
-      <WhiteCard>
+      <WhiteCard noPadding>
         <SectionTitleBlack>1.コミュニケーションタイプ</SectionTitleBlack>
         <div className="grid grid-cols-2">
           <div
@@ -247,8 +248,11 @@ export default function Compatibility() {
       </WhiteCard>
 
       {/* Card Two */}
-      <WhiteCard>
+      <WhiteCard noPadding>
         <SectionTitleBlack>2.不機嫌になるパターン</SectionTitleBlack>
+        <div className="mx-auto my-5">
+          <Image alt="" src={ManPondering} width={150} height={120} />
+        </div>
         <div className="grid grid-cols-2">
           <div
             className="w-full flex flex-col gap-3 items-center px-5 pt-5 pb-5"
@@ -271,8 +275,11 @@ export default function Compatibility() {
       </WhiteCard>
 
       {/* Card Three */}
-      <WhiteCard>
+      <WhiteCard noPadding>
         <SectionTitleBlack>3.ふたりが好きな遊び</SectionTitleBlack>
+        <div className="mx-auto">
+          <Image alt="" src={CoupleOnScooter} width={150} height={120} />
+        </div>
         <div className="grid grid-cols-2">
           <div
             className="w-full flex flex-col gap-3 items-center px-5 pt-5 pb-5"
