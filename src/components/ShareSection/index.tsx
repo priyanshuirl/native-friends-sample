@@ -23,12 +23,19 @@ export default function ShareSection({
   name,
   shareLink,
 }: PropTypes) {
+  const isDesktop = window.innerWidth >= 1100;
+
   const handleCopyLink = () => {
+    if (isDesktop) {
+      alert("コピーしました！");
+    }
     navigator.clipboard.writeText(shareLink);
   };
+
   const shareTitle = `生年月日入力のみで、自分の可能性が拓ける ${`${encodeURIComponent(
     name
   )} native. card｜1秒自己探索アイテム「native.」`}`;
+
   return (
     <WhiteCard>
       <div className="h-5" />
@@ -88,13 +95,14 @@ export default function ShareSection({
             <Image alt="" src={facebookIcon} width={30} style={{ zIndex: 1 }} />
           </div>
         </FacebookShareButton>
-        <Tooltip id="copied-to-clipboard-tooltip">コピーしました！</Tooltip>
+        {isDesktop ? null : (
+          <Tooltip id="copied-to-clipboard-tooltip">コピーしました！</Tooltip>
+        )}
         <div
           data-tooltip-id="copied-to-clipboard-tooltip"
-          className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
+          className="w-[55px] aspect-square flex items-center justify-center rounded-[12px] cursor-pointer"
           style={{ border: "0.6px solid #000" }}
           onClick={handleCopyLink}
-          onMouseEnter={handleCopyLink}
         >
           <Image alt="" src={shareIcon} width={30} style={{ zIndex: 1 }} />
         </div>
