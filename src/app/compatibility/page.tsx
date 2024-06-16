@@ -1,79 +1,28 @@
 "use client";
 import { logo } from "@/assets/brand";
-import {
-  facebookIcon,
-  instagramIcon,
-  lineIcon,
-  shareIcon,
-  xIcon,
-} from "@/assets/social";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import "react-circular-progressbar/dist/styles.css";
-import { Tooltip } from "react-tooltip";
 //@ts-ignore
 import { CircleProgress } from "react-gradient-progress";
+import { SectionText, WhiteCard } from "@/components/InfoComponent";
+import ShareSection from "@/components/ShareSection";
 
 function addAlpha(color: string, opacity: number) {
   var _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
   return color + _opacity.toString(16).toUpperCase();
 }
 
-const WhiteCard = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div
-      className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] overflow-hidden"
-      style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
-    >
-      {children}
-    </div>
-  );
-};
-
-const SectionTitleBlack = ({ children }: { children: React.ReactNode }) => (
+export const SectionTitleBlack = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <p
     className="text-black text-center font-semibold text-[16px] my-2"
     dangerouslySetInnerHTML={{ __html: children as any }}
   />
 );
-
-const SectionText = ({
-  children,
-  align = "center",
-  thin = false,
-}: {
-  children: React.ReactNode;
-  align?: "center" | "left";
-  thin?: boolean;
-}) => {
-  if ((children as string)?.includes("<br/>")) {
-    return (children as string)?.split("<br/>")?.map((content, index) => {
-      return index % 2 === 0 ? (
-        <b>
-          <p
-            className="text-black font-bold text-[16px] my-1"
-            style={{ textAlign: align }}
-            dangerouslySetInnerHTML={{ __html: content as any }}
-          />
-        </b>
-      ) : (
-        <p
-          className="text-black text-left  font-normal text-[12px]"
-          dangerouslySetInnerHTML={{ __html: content as any }}
-        />
-      );
-    });
-  } else {
-    return (
-      <p
-        className="text-black  text-[12px]"
-        style={{ textAlign: align, fontWeight: thin ? 400 : 600 }}
-        dangerouslySetInnerHTML={{ __html: children as any }}
-      />
-    );
-  }
-};
 
 export default function Compatibility() {
   const searchParams = useSearchParams();
@@ -345,65 +294,7 @@ export default function Compatibility() {
         </div>
       </WhiteCard>
 
-      {/* Card Six */}
-      <WhiteCard>
-        <div className="h-2" />
-        <p className="text-black text-center font-semibold text-[16px]">
-          native.をSNSでシェア、相性診断
-        </p>
-        <div className="mt-2 flex w-full flex-row justify-center gap-3 items-center mb-2">
-          <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-            onClick={() =>
-              window.open(
-                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${encodeURIComponent(
-                  `${selfUsername}`
-                )}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${encodeURIComponent(
-                  window.location.href
-                )}&hashtags=native.,#nativeで繋がろう,MBTI`
-              )
-            }
-          >
-            <Image alt="" src={xIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
-
-          {/* <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-          >
-            <Image
-              alt=""
-              src={instagramIcon}
-              width={30}
-              style={{ zIndex: 1 }}
-            />
-          </div> */}
-          {/* <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-          >
-            <Image alt="" src={lineIcon} width={30} style={{ zIndex: 1 }} />
-          </div> */}
-          {/* <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-          >
-            <Image alt="" src={facebookIcon} width={30} style={{ zIndex: 1 }} />
-          </div> */}
-          <Tooltip id="copied-to-clipboard-tooltip">コピーしました！</Tooltip>
-          <div
-            data-tooltip-id="copied-to-clipboard-tooltip"
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-            onClick={handleCopyLink}
-            onMouseEnter={handleCopyLink}
-          >
-            <Image alt="" src={shareIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
-        </div>
-        <div className="h-2" />
-      </WhiteCard>
+      <ShareSection name={`${selfUsername}`} shareLink={window.location.href} />
 
       {/* Footer */}
       <div className="flex flex-col gap-5 items-center">

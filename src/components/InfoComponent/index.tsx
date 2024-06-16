@@ -1,20 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  facebookIcon,
-  instagramIcon,
-  lineIcon,
-  shareIcon,
-  xIcon,
-} from "@/assets/social";
-import { logo, logoJPG } from "@/assets/brand";
+import { logo } from "@/assets/brand";
 import { useRouter } from "next/navigation";
-import { QRCode } from "react-qrcode-logo";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
+import ShareSection from "../ShareSection";
 
-const WhiteCard = ({ children }: { children: React.ReactNode }) => {
+export const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       className="w-[95%] mx-auto flex flex-col gap-2 bg-white rounded-[20px] py-4 px-4 pb-6"
@@ -25,21 +16,31 @@ const WhiteCard = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const RedSectionTitle = ({ children }: { children: React.ReactNode }) => (
+export const RedSectionTitle = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <p className="text-[#EC736E] text-center font-semibold text-[14px]">
     {children}
   </p>
 );
 
-const GoldenSectionTitle = ({ children }: { children: React.ReactNode }) => (
+export const GoldenSectionTitle = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <p className="text-[#E6B422] text-center font-semibold text-[16px]">
     {children}
   </p>
 );
 
-const HorizontalLine = () => <div className="h-[0.4px] w-full bg-black" />;
+export const HorizontalLine = () => (
+  <div className="h-[0.4px] w-full bg-black" />
+);
 
-const SectionText = ({
+export const SectionText = ({
   children,
   align = "center",
   thin = false,
@@ -76,7 +77,7 @@ const SectionText = ({
   }
 };
 
-const ColouredProgressIndicator = ({
+export const ColouredProgressIndicator = ({
   color,
   endIndicator,
   percentage,
@@ -299,10 +300,6 @@ export default function InfoComponent({
   const shareLink = `${window.location.origin}/info/share/${encodeURIComponent(
     name
   )}/${`${year}-${month}-${date}`}`;
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(shareLink);
-  };
 
   const handleIssueInstantly = () => {
     router.push(
@@ -689,81 +686,8 @@ export default function InfoComponent({
         </div>
       </div>
       {/* Card Six */}
-      <WhiteCard>
-        <div className="h-5" />
-        <p className="text-black text-center font-semibold text-[16px]">
-          スキャンして相性診断
-        </p>
-        <div className="flex flex-col items-center mt-5 mb-8 w-[60%] mx-auto">
-          <QRCode
-            size={256}
-            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-            value={shareLink}
-            fgColor={mainColor}
-            logoImage={logoJPG.src}
-            logoHeight={40}
-            logoWidth={90}
-            logoOpacity={1}
-            removeQrCodeBehindLogo
-            qrStyle="fluid"
-            logoPadding={10}
-            logoPaddingStyle="square"
-          />
-        </div>
-        <p className="text-black text-center font-semibold text-[16px]">
-          native.をSNSでシェア、相性診断
-        </p>
-        <div className="mt-2 flex w-full flex-row justify-center gap-3 items-center mb-2">
-          <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-            onClick={() =>
-              window.open(
-                `https://twitter.com/share?text=${`生年月日入力のみで、自分の可能性が拓ける ${`${encodeURIComponent(
-                  name
-                )}`} native. card｜1秒自己探索アイテム「native.」@benative14`}&url=${encodeURIComponent(
-                  shareLink
-                )}&hashtags=native.,#nativeで繋がろう,MBTI`
-              )
-            }
-          >
-            <Image alt="" src={xIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
-          {/* <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-          >
-            <Image
-              alt=""
-              src={instagramIcon}
-              width={30}
-              style={{ zIndex: 1 }}
-            />
-          </div> */}
-          {/* <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-          >
-            <Image alt="" src={lineIcon} width={30} style={{ zIndex: 1 }} />
-          </div> */}
-          {/* <div
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-          >
-            <Image alt="" src={facebookIcon} width={30} style={{ zIndex: 1 }} />
-          </div> */}
-          <Tooltip id="copied-to-clipboard-tooltip">コピーしました！</Tooltip>
-          <div
-            data-tooltip-id="copied-to-clipboard-tooltip"
-            className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
-            style={{ border: "0.6px solid #000" }}
-            onClick={handleCopyLink}
-            onMouseEnter={handleCopyLink}
-          >
-            <Image alt="" src={shareIcon} width={30} style={{ zIndex: 1 }} />
-          </div>
-        </div>
-      </WhiteCard>
+
+      <ShareSection name={name} shareLink={shareLink} mainColor={mainColor} />
 
       <div className="h-5" />
 
