@@ -116,14 +116,8 @@ export default function InfoComponent({
   const fitChara2Hash2 = `#${data?.best_partner_hashtag2?.split("#")?.[2]}`;
   const fitChara2Title = data?.best_partner_text_2;
 
-  const getAlongScore1 =
-    Math.round((Number(data?.native_score) - 5) * 2.77) < 8
-      ? 8
-      : Math.round((Number(data?.native_score) - 5) * 2.77);
-  const getAlongScore2 =
-    Math.round((Number(data?.native_score) + 5) * 2.77) > 100
-      ? 100
-      : Math.round((Number(data?.native_score) + 5) * 2.77);
+  const getAlongScore1 = Math.round(nativeScore - 13.85);
+  const getAlongScore2 = Math.round(nativeScore + 13.85);
 
   const secretGetAlong = data?.param12;
 
