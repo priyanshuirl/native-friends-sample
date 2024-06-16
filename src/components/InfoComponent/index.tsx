@@ -92,9 +92,9 @@ const ColouredProgressIndicator = ({
   const percentageToBeUsed = percentage > 100 ? 100 : percentage;
   const isRightAligned = type === startIndicator;
   return (
-    <div className="w-full flex flex-row items-center h-[56px] my-1">
+    <div className="w-[98%] flex flex-row items-center h-[56px] my-1 relative mx-auto">
       <p
-        className="text-[10px] font-semibold min-w-[70px] mt-10"
+        className="text-[10px] font-semibold min-w-[70px] left-0 top-10 absolute"
         style={{ color: startIndicator === type ? "#000" : "#AAA" }}
       >
         {startIndicator}
@@ -138,7 +138,7 @@ const ColouredProgressIndicator = ({
         </div>
       </div>
       <p
-        className="text-[10px] font-semibold min-w-[60px] mt-10 text-right"
+        className="text-[10px] font-semibold min-w-[60px] text-right right-0 top-10 absolute"
         style={{ color: endIndicator === type ? "#000" : "#AAA" }}
       >
         {endIndicator}
