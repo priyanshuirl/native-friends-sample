@@ -5,24 +5,20 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 //@ts-ignore
 import { CircleProgress } from "react-gradient-progress";
-import { SectionText, WhiteCard } from "@/components/InfoComponent";
 import ShareSection from "@/components/ShareSection";
 import {
   CoupleOnScooter,
   ManPondering,
   PeopleConversation,
 } from "@/assets/illustrations";
+import { SectionText, WhiteCard } from "@/components/PageCommons";
 
 function addAlpha(color: string, opacity: number) {
   var _opacity = Math.round(Math.min(Math.max(opacity ?? 1, 0), 1) * 255);
   return color + _opacity.toString(16).toUpperCase();
 }
 
-export const SectionTitleBlack = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => (
+const SectionTitleBlack = ({ children }: { children: React.ReactNode }) => (
   <p
     className="text-black text-center font-semibold text-[16px] my-2"
     dangerouslySetInnerHTML={{ __html: children as any }}
