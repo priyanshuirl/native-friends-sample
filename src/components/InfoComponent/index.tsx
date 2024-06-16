@@ -268,38 +268,37 @@ export default function InfoComponent({
                 <p className="font-semibold text-[#aaa] text-[12px]">
                   研究者気質
                 </p>
-                <div className="flex flex-row items-center justify-between w-full">
-                  <p className="font-semibold text-[#aaa] text-[12px]">1</p>
-                  <p
-                    className="font-semibold text-[#aaa] text-[12px] pr-1"
-                    style={{ borderRight: "0.4px solid #aaa" }}
-                  >
-                    33
-                  </p>
-                </div>
               </div>
               <div className="w-full flex flex-col gap-1 items-center">
                 <p className="font-semibold text-[#aaa] text-[12px]">
                   管理職気質
                 </p>
-                <div className="flex flex-row items-center justify-between w-full">
-                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
-                  <p
-                    className="font-semibold text-[#aaa] text-[12px] pl-1"
-                    style={{ borderLeft: "0.4px solid #aaa" }}
-                  >
-                    66
-                  </p>
-                </div>
               </div>
               <div className="w-full flex flex-col gap-1 items-center">
                 <p className="font-semibold text-[#aaa] text-[12px]">
                   起業家気質
                 </p>
-                <div className="flex flex-row items-center justify-between w-full">
-                  <p className="font-semibold text-[#aaa] text-[12px]"></p>
-                  <p className="font-semibold text-[#aaa] text-[12px]">100</p>
-                </div>
+              </div>
+            </div>
+            <div className="relative w-full flex flex-row items-center mb-2">
+              <div className="absolute" style={{ left: `0%` }}>
+                <p className="font-semibold text-[#aaa] text-[12px]">1</p>
+              </div>
+              <div className="absolute" style={{ left: `33%` }}>
+                <p
+                  className="font-semibold text-[#aaa] text-[12px] pr-1"
+                  style={{ borderRight: "0.4px solid #aaa" }}
+                >
+                  33
+                </p>
+              </div>
+              <div className="absolute" style={{ left: `66%` }}>
+                <p
+                  className="font-semibold text-[#aaa] text-[12px] pl-1"
+                  style={{ borderLeft: "0.4px solid #aaa" }}
+                >
+                  66
+                </p>
               </div>
             </div>
             <div
