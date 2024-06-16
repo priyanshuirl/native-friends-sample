@@ -331,7 +331,7 @@ export default function InfoComponent({
                 }}
               />
             </div>
-            <div className="w-full relative h-10 pb-5">
+            <div className="w-full relative">
               <div
                 className="h-3 w-[1px] bg-[#AAA] absolute ml-[7px]"
                 style={{ left: `${getAlongScore1}%` }}
@@ -347,19 +347,18 @@ export default function InfoComponent({
                   width: `${getAlongScore2 - getAlongScore1}%`,
                 }}
               />
-              <div
-                className="top-[22px] absolute"
-                style={{
-                  left: `${getAlongScore1 - 25}%`,
-                }}
-              >
-                <p className="font-semibold text-black text-[12px] whitespace-nowrap">
-                  あなたと相性が良い人のスコアは{getAlongScore1}~
-                  {getAlongScore2}
-                </p>
-              </div>
             </div>
           </div>
+        </div>
+        <div
+          className="mt-[20px] mx-auto"
+          style={{
+            left: `${getAlongScore1 - 25}%`,
+          }}
+        >
+          <p className="font-semibold text-black text-[12px] whitespace-nowrap">
+            あなたと相性が良い人のスコアは{getAlongScore1}~{getAlongScore2}
+          </p>
         </div>
       </WhiteCard>
 
