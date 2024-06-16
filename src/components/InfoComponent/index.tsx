@@ -294,6 +294,9 @@ export default function InfoComponent({
                   66
                 </p>
               </div>
+              <div className="absolute" style={{ left: `92%` }}>
+                <p className="font-semibold text-[#aaa] text-[12px]">100</p>
+              </div>
             </div>
             <div
               className="h-[12px] rounded-full overflow-hidden flex flex-row items-center relative"
