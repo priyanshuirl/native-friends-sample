@@ -84,6 +84,7 @@ export default function InfoComponent({
 
   // Top Card
   const mainColor = data?.hex_color;
+  const qrCodeColor = data?.hex_color_qr;
   const userName = name;
   const userType = data?.param1;
   const personalChara = data?.param2;
@@ -620,7 +621,7 @@ export default function InfoComponent({
       </div>
       {/* Card Six */}
 
-      <ShareSection name={name} shareLink={shareLink} mainColor={mainColor} />
+      <ShareSection name={name} shareLink={shareLink} mainColor={qrCodeColor} />
 
       <div className="h-5" />
 
