@@ -219,18 +219,18 @@ export default function Matched() {
             );
           }
         )}
+        <div className="h-10" />
+        <ShareSection
+          name={`${searchParams.get("self-name")}`}
+          shareLink={window.location.origin}
+        />
+        <div className="flex flex-col items-center mt-10 mb-1">
+          <Image alt="" src={logo} width={150} style={{ zIndex: 1 }} />
+        </div>
+        <p className="text-center text-[8px] text-[#A1A1AA]">
+          © 2024 native.K.K All Rights Reserved.
+        </p>
       </div>
-      <div className="h-10" />
-      <ShareSection
-        name={`${searchParams.get("self-name")}`}
-        shareLink={window.location.origin}
-      />
-      <div className="flex flex-col items-center mt-10 mb-1">
-        <Image alt="" src={logo} width={150} style={{ zIndex: 1 }} />
-      </div>
-      <p className="text-center text-[8px] text-[#A1A1AA]">
-        © 2024 native.K.K All Rights Reserved.
-      </p>
     </div>
   );
 }

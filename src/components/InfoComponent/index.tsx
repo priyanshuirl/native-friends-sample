@@ -76,6 +76,23 @@ export default function InfoComponent({
     const mtbiAPIData = await mtbiAPIResponse.json();
     setData(apiData);
     setMTBIData(mtbiAPIData);
+
+    const userIdFromLocalStorage = localStorage.getItem("USER_ID");
+    if (!shared && !userIdFromLocalStorage) {
+      const apiResponse = await fetch(
+        `https://native.ikeda042api.net/api/friends/friends_cards/${encodeURIComponent(
+          name
+        )}/${year}/${month}/${date}`,
+        { method: "POST" }
+      );
+      const data = await apiResponse.json();
+      localStorage.setItem("USER_ID", data?.user_id);
+    }
+    const referrerUserIdFomUrl = searchParams.get("referrer-userid");
+    if (referrerUserIdFomUrl) {
+      localStorage.setItem("REFERRER_USER_ID", referrerUserIdFomUrl);
+    }
+
     setIsLoading(false);
   };
 
@@ -199,27 +216,6 @@ export default function InfoComponent({
       `/matched?self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
     );
   };
-
-  useEffect(() => {
-    const userIdFromLocalStorage = localStorage.getItem("USER_ID");
-    const issueUserId = async () => {
-      const apiResponse = await fetch(
-        `https://native.ikeda042api.net/api/friends/friends_cards/${encodeURIComponent(
-          name
-        )}/${year}/${month}/${date}`,
-        { method: "POST" }
-      );
-      const data = await apiResponse.json();
-      localStorage.setItem("USER_ID", data?.user_id);
-    };
-    if (!shared && !userIdFromLocalStorage) {
-      issueUserId();
-    }
-    const referrerUserIdFomUrl = searchParams.get("referrer-userid");
-    if (referrerUserIdFomUrl) {
-      localStorage.setItem("REFERRER_USER_ID", referrerUserIdFomUrl);
-    }
-  }, []);
 
   return isLoading ? (
     <div className="min-h-[100svh] w-full flex flex-col items-center justify-center gap-2">
