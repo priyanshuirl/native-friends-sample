@@ -47,6 +47,7 @@ export default function Home() {
   const referrerDOB = searchParams.get("referrer-dob") as string;
 
   const handleClick = () => {
+    if (!name || !date) return;
     localStorage.removeItem("USER_ID");
     if (referrerName?.length > 1 && referrerDOB?.length > 1) {
       const url = `/info/referred/${encodeURIComponent(
