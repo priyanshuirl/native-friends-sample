@@ -45,6 +45,7 @@ export default function InfoComponent({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [mtbiData, setMTBIData] = useState<any>();
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
+  const [userIdForLink, setUserIdForLink] = useState<string>("");
 
   const handleReadMore = () => {
     scrollAnchorRef.current?.scrollIntoView({
@@ -87,6 +88,7 @@ export default function InfoComponent({
       );
       const data = await apiResponse.json();
       localStorage.setItem("USER_ID", data?.user_id);
+      setUserIdForLink(data?.user_id);
       localStorage.setItem("USER_NAME", name);
       localStorage.setItem("USER_DOB", `${year}-${month}-${date}`);
     }
@@ -193,9 +195,7 @@ export default function InfoComponent({
 
   const shareLink = `${window.location.origin}/info/share/${encodeURIComponent(
     name
-  )}/${`${year}-${month}-${date}`}?&referrer-userid=${localStorage.getItem(
-    "USER_ID"
-  )}`;
+  )}/${`${year}-${month}-${date}`}?&referrer-userid=${userIdForLink}`;
 
   const handleIssueInstantly = () => {
     router.push(
