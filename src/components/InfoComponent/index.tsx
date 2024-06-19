@@ -79,6 +79,7 @@ export default function InfoComponent({
     setMTBIData(mtbiAPIData);
 
     const userIdFromLocalStorage = localStorage.getItem("USER_ID");
+    setUserIdForLink(`${userIdFromLocalStorage}`);
     if (!shared && !userIdFromLocalStorage) {
       const apiResponse = await fetch(
         `https://native.ikeda042api.net/api/friends/friends_cards/${encodeURIComponent(
