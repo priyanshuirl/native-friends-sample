@@ -67,7 +67,10 @@ export default function Compatibility() {
     await fetch(
       `https://native.ikeda042api.net/api/friends/score/user_ids/${localStorage.getItem(
         "USER_ID"
-      )}/${localStorage.getItem("REFERRER_USER_ID")}`,
+      )}/${
+        localStorage.getItem("REFERRER_USER_ID") ??
+        searchParams.get("auxuserid")
+      }`,
       { method: "POST" }
     );
     const apiDataCompatibility = await apiResponseCompatibility.json();

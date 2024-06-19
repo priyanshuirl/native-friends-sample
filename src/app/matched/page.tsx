@@ -20,6 +20,7 @@ const MatchedCard = ({
   type,
   score,
   dob,
+  userId,
 }: {
   hexColor: string;
   name: string;
@@ -28,6 +29,7 @@ const MatchedCard = ({
   type: string;
   score: number | string;
   dob: string;
+  userId: string;
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,7 +46,7 @@ const MatchedCard = ({
         dob?.split("-")?.[2]
       }`}&self-name=${searchParams.get(
         "self-name"
-      )}&self-dob=${`${self.year}-${self.month}-${self.date}`}`
+      )}&self-dob=${`${self.year}-${self.month}-${self.date}`}&auxuserid=${userId}`
     );
   };
   return (
@@ -215,6 +217,7 @@ export default function Matched() {
                 type={param1}
                 score={score}
                 dob={dob}
+                userId={user_id}
               />
             );
           }
