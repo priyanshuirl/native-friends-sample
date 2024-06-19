@@ -63,7 +63,14 @@ export default function Home() {
   };
 
   if (!!localStorage.getItem("USER_ID")) {
-    router.push(`${localStorage.getItem("REDIRECT_URL")}`);
+    if (referrerName && referrerDOB) {
+      const url = `/info/referred/${encodeURIComponent(
+        referrerName
+      )}/${encodeURIComponent(referrerDOB)}/?name=${name}&dob=${date}`;
+      router.push(url);
+    } else {
+      router.push(`${localStorage.getItem("REDIRECT_URL")}`);
+    }
   }
 
   return (
