@@ -189,11 +189,14 @@ export default function InfoComponent({
   const toreitsu3 = data?.param17;
   const toreitsu3Desc = data?.param18;
 
-  const shareLink = `${window.location.origin}/info/share/${encodeURIComponent(
-    name
-  )}/${`${year}-${month}-${date}`}?&referrer-userid=${localStorage.getItem(
-    "USER_ID"
-  )}`;
+  const shareLink = () => {
+    console.log(localStorage.getItem("USER_ID"), "here");
+    return `${window.location.origin}/info/share/${encodeURIComponent(
+      name
+    )}/${`${year}-${month}-${date}`}?&referrer-userid=${localStorage.getItem(
+      "USER_ID"
+    )}`;
+  };
 
   const handleIssueInstantly = () => {
     router.push(
@@ -647,7 +650,13 @@ export default function InfoComponent({
       </div>
       {/* Card Six */}
 
-      <ShareSection name={name} shareLink={shareLink} mainColor={qrCodeColor} />
+      <ShareSection
+        name={name}
+        //@ts-ignore
+        shareLink={shareLink}
+        shareLinkTypeFn
+        mainColor={qrCodeColor}
+      />
 
       <div className="h-5" />
 

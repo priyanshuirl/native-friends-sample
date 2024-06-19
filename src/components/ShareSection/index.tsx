@@ -16,20 +16,24 @@ interface PropTypes {
   shareLink: string;
   mainColor?: string;
   name: string;
+  shareLinkTypeFn?: boolean;
 }
 
 export default function ShareSection({
   mainColor,
   name,
   shareLink,
+  shareLinkTypeFn = false,
 }: PropTypes) {
+  //@ts-ignore
+  const shareLinkText = shareLinkTypeFn ? shareLink() : shareLink;
   const isDesktop = window.innerWidth >= 1100;
 
   const handleCopyLink = () => {
     if (isDesktop) {
       alert("コピーしました！");
     }
-    navigator.clipboard.writeText(shareLink);
+    navigator.clipboard.writeText(shareLinkText);
   };
 
   const shareTitle = `生年月日入力のみで、自分の可能性が拓ける ${`${encodeURIComponent(
@@ -49,7 +53,7 @@ export default function ShareSection({
           <QRCode
             size={256}
             style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-            value={shareLink}
+            value={shareLinkText}
             fgColor={mainColor}
             logoImage={logoJPG.src}
             logoHeight={40}
@@ -68,7 +72,7 @@ export default function ShareSection({
       <div className="mt-2 flex w-full flex-row justify-center gap-3 items-center mb-2">
         <TwitterShareButton
           title={shareTitle}
-          url={shareLink}
+          url={shareLinkText}
           hashtags={["native.", "nativeで繋がろう", "MBTI"]}
           related={["@benative14"]}
         >
@@ -79,7 +83,7 @@ export default function ShareSection({
             <Image alt="" src={xIcon} width={30} style={{ zIndex: 1 }} />
           </div>
         </TwitterShareButton>
-        <LineShareButton title={shareTitle} url={shareLink}>
+        <LineShareButton title={shareTitle} url={shareLinkText}>
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
@@ -87,7 +91,7 @@ export default function ShareSection({
             <Image alt="" src={lineIcon} width={30} style={{ zIndex: 1 }} />
           </div>
         </LineShareButton>
-        <FacebookShareButton url={shareLink} title={shareTitle}>
+        <FacebookShareButton url={shareLinkText} title={shareTitle}>
           <div
             className="w-[55px] aspect-square flex items-center justify-center rounded-[12px]"
             style={{ border: "0.6px solid #000" }}
