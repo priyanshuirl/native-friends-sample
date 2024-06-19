@@ -207,19 +207,22 @@ export default function InfoComponent({
   };
 
   const handleCompatible = () => {
-    if (!localStorage.getItem("USER_ID")) {
-      router.push(
-        `/compatibility?referrer-name=${encodeURIComponent(
-          `${referrerName}`
-        )}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
-      );
-    } else {
+    if (
+      !!localStorage.getItem("USER_NAME") &&
+      !!searchParams.get("referrer-userid")
+    ) {
       router.push(
         `/compatibility?referrer-name=${encodeURIComponent(
           `${name}`
         )}&referrer-dob=${`${year}-${month}-${date}`}&self-name=${localStorage.getItem(
           "USER_NAME"
         )}&self-dob=${`${localStorage.getItem("USER_DOB")}`}`
+      );
+    } else {
+      router.push(
+        `/compatibility?referrer-name=${encodeURIComponent(
+          `${referrerName}`
+        )}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
       );
     }
   };
@@ -672,9 +675,10 @@ export default function InfoComponent({
           style={{ transform: "translate(-50%,-50%)", zIndex: 9 }}
           onClick={handleCompatible}
         >
-          {!localStorage.getItem("USER_ID")
-            ? decodeURIComponent(`${referrerName}`)
-            : decodeURIComponent(`${name}`)}{" "}
+          {localStorage.getItem("USER_ID") &&
+          searchParams.get("referrer-userid")
+            ? decodeURIComponent(`${name}`)
+            : decodeURIComponent(`${referrerName}`)}{" "}
           さんとの相性診断 ⁨⁩⁨⁩ ▶︎
         </button>
       ) : null}
