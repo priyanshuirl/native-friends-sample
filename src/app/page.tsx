@@ -14,7 +14,7 @@ import {
 import { CustomInput } from "@/components/CustomInput";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import DatePicker from "react-date-picker";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
@@ -49,15 +49,21 @@ export default function Home() {
   const handleClick = () => {
     localStorage.removeItem("USER_ID");
     if (referrerName?.length > 1 && referrerDOB?.length > 1) {
-      router.push(
-        `/info/referred/${encodeURIComponent(
-          referrerName
-        )}/${encodeURIComponent(referrerDOB)}/?name=${name}&dob=${date}`
-      );
+      const url = `/info/referred/${encodeURIComponent(
+        referrerName
+      )}/${encodeURIComponent(referrerDOB)}/?name=${name}&dob=${date}`;
+      router.push(url);
+      localStorage.setItem("REDIRECT_URL", url);
     } else {
-      router.push(`/info?name=${name}&dob=${date}`);
+      const url = `/info?name=${name}&dob=${date}`;
+      router.push(url);
+      localStorage.setItem("REDIRECT_URL", url);
     }
   };
+
+  if (!!localStorage.getItem("USER_ID")) {
+    router.push(`${localStorage.getItem("REDIRECT_URL")}`);
+  }
 
   return (
     <div className="max-w-[450px] m-auto flex flex-col justify-between items-center min-h-[100svh] bg-white">
