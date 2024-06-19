@@ -64,6 +64,12 @@ export default function Compatibility() {
         searchParams.get("self-dob")?.split("-")?.[1]
       }`}/${`${searchParams.get("self-dob")?.split("-")?.[2]}`}`
     );
+    await fetch(
+      `https://native.ikeda042api.net/api/friends/score/user_ids/${localStorage.getItem(
+        "USER_ID"
+      )}/${localStorage.getItem("REFERRER_USER_ID")}`,
+      { method: "POST" }
+    );
     const apiDataCompatibility = await apiResponseCompatibility.json();
     setCompatibilityData(apiDataCompatibility);
     setSelfData(apiDataSelf);

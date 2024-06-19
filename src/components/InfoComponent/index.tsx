@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { logo } from "@/assets/brand";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ShareSection from "../ShareSection";
 import {
   GirlAnalyst,
@@ -38,6 +38,7 @@ export default function InfoComponent({
   referrerDOB?: { year: string; month: string; date: string };
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isReadMoreHidden, setIsReadMoreHidden] = useState<boolean>(true);
   const [hideButton, setHideButton] = useState<boolean>(false);
   const [data, setData] = useState<any>();
@@ -173,7 +174,9 @@ export default function InfoComponent({
 
   const shareLink = `${window.location.origin}/info/share/${encodeURIComponent(
     name
-  )}/${`${year}-${month}-${date}`}`;
+  )}/${`${year}-${month}-${date}`}?&referrer-userid=${localStorage.getItem(
+    "USER_ID"
+  )}`;
 
   const handleIssueInstantly = () => {
     router.push(
@@ -190,6 +193,33 @@ export default function InfoComponent({
       )}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
     );
   };
+
+  const handleMatchPage = () => {
+    router.push(
+      `/matched?self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
+    );
+  };
+
+  useEffect(() => {
+    const userIdFromLocalStorage = localStorage.getItem("USER_ID");
+    const issueUserId = async () => {
+      const apiResponse = await fetch(
+        `https://native.ikeda042api.net/api/friends/friends_cards/${encodeURIComponent(
+          name
+        )}/${year}/${month}/${date}`,
+        { method: "POST" }
+      );
+      const data = await apiResponse.json();
+      localStorage.setItem("USER_ID", data?.user_id);
+    };
+    if (!shared && !userIdFromLocalStorage) {
+      issueUserId();
+    }
+    const referrerUserIdFomUrl = searchParams.get("referrer-userid");
+    if (referrerUserIdFomUrl) {
+      localStorage.setItem("REFERRER_USER_ID", referrerUserIdFomUrl);
+    }
+  }, []);
 
   return isLoading ? (
     <div className="min-h-[100svh] w-full flex flex-col items-center justify-center gap-2">
@@ -634,6 +664,15 @@ export default function InfoComponent({
           {decodeURIComponent(`${referrerName}`)} さんとの相性診断 ⁨⁩⁨⁩ ▶︎
         </button>
       ) : null}
+
+      <button
+        onClick={handleMatchPage}
+        className=" border-none w-[85%] mx-auto h-[70px] flex items-center justify-center bg-[#6B6B6BD9] opacity-85 rounded-[20px]"
+      >
+        <p className="text-white text-[16px] font-semibold">
+          診断結果一覧を見る
+        </p>
+      </button>
 
       {hideButton ? null : (
         <button
