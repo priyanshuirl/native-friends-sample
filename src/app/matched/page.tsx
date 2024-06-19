@@ -199,49 +199,53 @@ export default function Matched() {
   ) : (
     <div className="p-5 bg-white w-full min-h-[100svh]">
       <div className="max-w-[450px] mx-auto">
-        <p className="font-bold text-[18px] text-black">native.相性診断結果</p>
-        {matchedData?.length > 0 ? (
-          matchedData?.map(
-            ({
-              user_id,
-              infoData: { hex_color, param20, param3, param1 },
-              input_name,
-              score,
-              dob,
-            }) => {
-              return (
-                <MatchedCard
-                  key={user_id}
-                  hexColor={hex_color}
-                  name={input_name}
-                  bubbleText={param20}
-                  sideText={param3}
-                  type={param1}
-                  score={score}
-                  dob={dob}
-                  userId={user_id}
-                />
-              );
-            }
-          )
-        ) : (
-          <div
-            className="mt-10 w-full h-[400px] flex flex-col justify-center items-center bg-[#F8F3FB] rounded-[16px] "
-            style={{
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-              lineHeight: "26px",
-            }}
-          >
-            <Image src={ConstructionWorker} width={200} height={200} alt="" />
-            <p className="text-center text-[14px]">
-              診断結果がありません。
-              <br />
-              招待したお友達が診断したタイミングで
-              <br />
-              表示されます。
-            </p>
-          </div>
-        )}
+        <div className="w-[95%] mx-auto">
+          <p className="font-bold text-[18px] text-black">
+            native.相性診断結果
+          </p>
+          {matchedData?.length > 0 ? (
+            matchedData?.map(
+              ({
+                user_id,
+                infoData: { hex_color, param20, param3, param1 },
+                input_name,
+                score,
+                dob,
+              }) => {
+                return (
+                  <MatchedCard
+                    key={user_id}
+                    hexColor={hex_color}
+                    name={input_name}
+                    bubbleText={param20}
+                    sideText={param3}
+                    type={param1}
+                    score={score}
+                    dob={dob}
+                    userId={user_id}
+                  />
+                );
+              }
+            )
+          ) : (
+            <div
+              className="mt-10 w-full h-[400px] flex flex-col justify-center items-center bg-[#F8F3FB] rounded-[16px] "
+              style={{
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                lineHeight: "26px",
+              }}
+            >
+              <Image src={ConstructionWorker} width={200} height={200} alt="" />
+              <p className="text-center text-[14px]">
+                診断結果がありません。
+                <br />
+                招待したお友達が診断したタイミングで
+                <br />
+                表示されます。
+              </p>
+            </div>
+          )}
+        </div>
         <div className="h-10" />
         <ShareSection
           name={`${searchParams.get("self-name")}`}
