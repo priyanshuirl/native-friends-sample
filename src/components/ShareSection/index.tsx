@@ -16,17 +16,15 @@ interface PropTypes {
   shareLink: string;
   mainColor?: string;
   name: string;
-  shareLinkTypeFn?: boolean;
 }
 
 export default function ShareSection({
   mainColor,
   name,
   shareLink,
-  shareLinkTypeFn = false,
 }: PropTypes) {
   //@ts-ignore
-  const shareLinkText = shareLinkTypeFn ? shareLink() : shareLink;
+  const shareLinkText = shareLink;
   const isDesktop = window.innerWidth >= 1100;
 
   const handleCopyLink = () => {

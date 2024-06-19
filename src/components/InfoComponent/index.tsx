@@ -87,6 +87,8 @@ export default function InfoComponent({
       );
       const data = await apiResponse.json();
       localStorage.setItem("USER_ID", data?.user_id);
+      localStorage.setItem("USER_NAME", name);
+      localStorage.setItem("USER_DOB", `${year}-${month}-${date}`);
     }
     const referrerUserIdFomUrl = searchParams.get("referrer-userid");
     if (referrerUserIdFomUrl) {
@@ -189,14 +191,11 @@ export default function InfoComponent({
   const toreitsu3 = data?.param17;
   const toreitsu3Desc = data?.param18;
 
-  const shareLink = () => {
-    console.log(localStorage.getItem("USER_ID"), "here");
-    return `${window.location.origin}/info/share/${encodeURIComponent(
-      name
-    )}/${`${year}-${month}-${date}`}?&referrer-userid=${localStorage.getItem(
-      "USER_ID"
-    )}`;
-  };
+  const shareLink = `${window.location.origin}/info/share/${encodeURIComponent(
+    name
+  )}/${`${year}-${month}-${date}`}?&referrer-userid=${localStorage.getItem(
+    "USER_ID"
+  )}`;
 
   const handleIssueInstantly = () => {
     router.push(
@@ -207,11 +206,21 @@ export default function InfoComponent({
   };
 
   const handleCompatible = () => {
-    router.push(
-      `/compatibility?referrer-name=${encodeURIComponent(
-        `${referrerName}`
-      )}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
-    );
+    if (!localStorage.getItem("USER_ID")) {
+      router.push(
+        `/compatibility?referrer-name=${encodeURIComponent(
+          `${referrerName}`
+        )}&referrer-dob=${`${referrerDOB?.year}-${referrerDOB?.month}-${referrerDOB?.date}`}&self-name=${name}&self-dob=${`${year}-${month}-${date}`}`
+      );
+    } else {
+      router.push(
+        `/compatibility?referrer-name=${encodeURIComponent(
+          `${name}`
+        )}&referrer-dob=${`${year}-${month}-${date}`}&self-name=${localStorage.getItem(
+          "USER_NAME"
+        )}&self-dob=${`${localStorage.getItem("USER_DOB")}`}`
+      );
+    }
   };
 
   const handleMatchPage = () => {
@@ -226,7 +235,7 @@ export default function InfoComponent({
     </div>
   ) : (
     <div className="mx-auto max-w-[450px] w-full flex flex-col items-center gap-5 min-h-[100svh] pb-10">
-      {shared ? (
+      {shared && !localStorage.getItem("USER_ID") ? (
         <button
           className="fixed bottom-0 font-bold left-[50%] text-[18px] bg-[#EC736E] text-white w-[200px] h-[50px] flex items-center justify-center rounded-[16px] z-[9]"
           style={{ transform: "translate(-50%,-50%)", zIndex: 9 }}
@@ -650,23 +659,22 @@ export default function InfoComponent({
       </div>
       {/* Card Six */}
 
-      <ShareSection
-        name={name}
-        //@ts-ignore
-        shareLink={shareLink}
-        shareLinkTypeFn
-        mainColor={qrCodeColor}
-      />
+      <ShareSection name={name} shareLink={shareLink} mainColor={qrCodeColor} />
 
       <div className="h-5" />
 
-      {isReferred ? (
+      {isReferred ||
+      (localStorage.getItem("USER_ID") &&
+        searchParams.get("referrer-userid")) ? (
         <button
           className="fixed bottom-0 left-[50%] font-bold text-[14px] bg-[#EC736E] text-white w-max h-[50px] flex items-center justify-center rounded-[16px] px-4 z-10"
           style={{ transform: "translate(-50%,-50%)", zIndex: 9 }}
           onClick={handleCompatible}
         >
-          {decodeURIComponent(`${referrerName}`)} さんとの相性診断 ⁨⁩⁨⁩ ▶︎
+          {!localStorage.getItem("USER_ID")
+            ? decodeURIComponent(`${referrerName}`)
+            : decodeURIComponent(`${name}`)}{" "}
+          さんとの相性診断 ⁨⁩⁨⁩ ▶︎
         </button>
       ) : null}
 
