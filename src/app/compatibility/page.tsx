@@ -138,7 +138,9 @@ export default function Compatibility() {
             style={{ transform: "translate(-68%,-40%)" }}
           >
             <CircleProgress
-              percentage={compatibilityData?.score}
+              percentage={
+                compatibilityData?.score > 100 ? 100 : compatibilityData?.score
+              }
               strokeWidth={14}
               width={150}
               primaryColor={["#B69EC6", "#A6C1EA"]}

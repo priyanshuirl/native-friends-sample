@@ -104,7 +104,7 @@ const MatchedCard = ({
             />
             <div className="w-[80px]">
               <CircularProgressbarWithChildren
-                value={Number(score)}
+                value={Number(score) > 100 ? 100 : Number(score)}
                 strokeWidth={14}
                 styles={buildStyles({
                   pathColor: hexColor,
