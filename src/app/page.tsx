@@ -66,7 +66,9 @@ export default function Home() {
     if (referrerName && referrerDOB) {
       const url = `/info/referred/${encodeURIComponent(
         referrerName
-      )}/${encodeURIComponent(referrerDOB)}/?name=${name}&dob=${date}`;
+      )}/${encodeURIComponent(
+        referrerDOB
+      )}/?name=${referrerName}&dob=${referrerDOB}`;
       router.push(url);
     } else {
       router.push(`${localStorage.getItem("REDIRECT_URL")}`);
