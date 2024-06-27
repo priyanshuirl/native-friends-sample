@@ -75,6 +75,8 @@ export default function Home() {
     }
   }
 
+  const isMobile = window?.innerWidth < 800;
+
   return (
     <div className="max-w-[450px] m-auto flex flex-col justify-between items-center min-h-[100svh] bg-white">
       <div className="flex flex-col items-center gap-10 w-full">
@@ -105,25 +107,45 @@ export default function Home() {
             placeholder="お名前"
             type="text"
           />
-          <p className="text-[12px] text-black font-normal mb-[-12px]">
-            {"生年月日を入力してください"}
-          </p>
-          <DatePicker
-            onChange={(value) => {
-              const dateObj = new Date(`${value}`);
-              dateObj.setHours(23);
-              setDate(new Date(`${dateObj}`).toISOString()?.split("T")?.[0]);
-              setDateInputVal(value);
-            }}
-            value={dateInputVal}
-            maxDate={new Date("2999-12-31")}
-            minDate={new Date("1000-12-31")}
-            format="y-MM-d"
-            clearIcon={null}
-            dayPlaceholder="dd"
-            monthPlaceholder="mm"
-            yearPlaceholder="yyyy"
-          />
+
+          {isMobile ? (
+            <CustomInput
+              label="生年月日を入力してください"
+              onChange={(value) => {
+                const dateObj = new Date(`${value}`);
+                dateObj.setHours(23);
+                setDate(new Date(`${dateObj}`).toISOString()?.split("T")?.[0]);
+                setDateInputVal(value);
+              }}
+              value={dateInputVal}
+              placeholder="お名前"
+              type="date"
+            />
+          ) : (
+            <>
+              <p className="text-[12px] text-black font-normal mb-[-12px]">
+                {"生年月日を入力してください"}
+              </p>
+              <DatePicker
+                onChange={(value) => {
+                  const dateObj = new Date(`${value}`);
+                  dateObj.setHours(23);
+                  setDate(
+                    new Date(`${dateObj}`).toISOString()?.split("T")?.[0]
+                  );
+                  setDateInputVal(value);
+                }}
+                value={dateInputVal}
+                maxDate={new Date("2999-12-31")}
+                minDate={new Date("1000-12-31")}
+                format="y-MM-d"
+                clearIcon={null}
+                dayPlaceholder="dd"
+                monthPlaceholder="mm"
+                yearPlaceholder="yyyy"
+              />
+            </>
+          )}
         </div>
         <button
           className="rounded-[18px] bg-[#696969] w-[140px] h-[56px] px-[16px] py-[12px] text-white"
